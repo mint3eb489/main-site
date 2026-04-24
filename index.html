@@ -9,7 +9,7 @@
   <style>
     /* --- CSS Variablen für Konfigurator --- */
     :root {
-      --front-bg: #907B71;
+      --front-bg: #F5F5F5;
       --front-image: none;
       --apl-bg: #F8F9FA;
       --apl-image: none;
@@ -34,6 +34,9 @@
     /* --- Drag to Scroll Cursor --- */
     .cursor-grab { cursor: grab; }
     .cursor-grabbing { cursor: grabbing; }
+
+    /* Verhindert Hover-Lagging während des Ziehens am PC */
+    .is-dragging > button { pointer-events: none; }
 
     /* --- Kachel-Raster Styling --- */
     .config-btn.active { 
@@ -98,7 +101,7 @@
           Hallo, ich bin Enrico Belmonte, Küchenfachberater & Ausbilder. Die Küche ist mehr als ein Arbeitsplatz - sie ist das Herzstück des Zuhauses. Mit präziser 3D-Planung und einem Auge für Details gestalte ich Räume, die Ergonomie und Ästhetik perfekt vereinen.
         </p>
         
-        <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex flex-col sm:row gap-4">
           <a href="mailto:belmonte@fs-kuechen.de" class="inline-flex items-center justify-center gap-4 border border-[#907B71] px-6 py-3 transition-all hover:bg-[#907B71] hover:text-[#F4F1F0] group">
             <span class="text-sm tracking-wide uppercase">Projekt starten</span>
             <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" stroke-width="1"></i>
@@ -146,22 +149,22 @@
       </div>
       <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2">
         <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors sm:border-r border-b border-black/10">
-          <span class="text-xs font-medium text-[#D4A373]">01</span>
+          <span class="text-xs font-medium" style="color: #D4A373">01</span>
           <h3 class="text-lg tracking-wide mt-2 mb-2">Bedarfsanalyse</h3>
           <p class="text-sm opacity-60 leading-relaxed">Verständnis für deine Kochgewohnheiten und Laufwege.</p>
         </div>
         <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors border-b border-black/10">
-          <span class="text-xs font-medium text-[#D4A373]">02</span>
+          <span class="text-xs font-medium" style="color: #D4A373">02</span>
           <h3 class="text-lg tracking-wide mt-2 mb-2">3D-Planung</h3>
           <p class="text-sm opacity-60 leading-relaxed">Fotorealistische Visualisierung mit CARAT.</p>
         </div>
         <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors sm:border-r border-black/10">
-          <span class="text-xs font-medium text-[#D4A373]">03</span>
+          <span class="text-xs font-medium" style="color: #D4A373">03</span>
           <h3 class="text-lg tracking-wide mt-2 mb-2">Materialkonzept</h3>
           <p class="text-sm opacity-60 leading-relaxed">Harmonische Abstimmung von Fronten, Arbeitsplatten und Licht.</p>
         </div>
         <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors">
-          <span class="text-xs font-medium text-[#D4A373]">04</span>
+          <span class="text-xs font-medium" style="color: #D4A373">04</span>
           <h3 class="text-lg tracking-wide mt-2 mb-2">Projektleitung</h3>
           <p class="text-sm opacity-60 leading-relaxed">Vom ersten Aufmaß bis zur finalen Montage.</p>
         </div>
@@ -237,8 +240,8 @@
                   <!-- Kategorien werden hier per JS generiert -->
                 </div>
               </div>
-              <!-- Horizontale Swipe-Leiste (mit py-2 gegen Abschneiden) -->
-              <div id="container-fronten" class="flex overflow-x-auto gap-3 py-2 px-1 -mx-1 snap-x hide-scrollbar cursor-grab">
+              <!-- Horizontale Swipe-Leiste (mit px-4 und scroll-px-4 gegen seitliches Abschneiden) -->
+              <div id="container-fronten" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab">
                 <!-- Swatches werden per JS generiert -->
               </div>
             </div>
@@ -251,15 +254,20 @@
                   <!-- Kategorien werden hier per JS generiert -->
                 </div>
               </div>
-              <div id="container-arbeitsplatten" class="flex overflow-x-auto gap-3 py-2 px-1 -mx-1 snap-x hide-scrollbar cursor-grab">
+              <div id="container-arbeitsplatten" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab">
                 <!-- Wird per JS generiert -->
               </div>
             </div>
 
-            <!-- 3. Korpus -->
+            <!-- 3. Korpus (mit Kategorien) -->
             <div>
-              <p class="text-[10px] uppercase tracking-widest mb-2 font-medium text-[#907B71]">3. Korpus</p>
-              <div id="container-korpus" class="flex overflow-x-auto gap-3 py-2 px-1 -mx-1 snap-x hide-scrollbar cursor-grab">
+              <div class="flex justify-between items-end mb-2">
+                <p class="text-[10px] uppercase tracking-widest font-medium text-[#907B71]">3. Korpus</p>
+                <div id="container-korpus-kategorien" class="flex gap-1.5">
+                  <!-- Kategorien werden hier per JS generiert -->
+                </div>
+              </div>
+              <div id="container-korpus" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab">
                 <!-- Wird per JS generiert -->
               </div>
             </div>
@@ -267,7 +275,7 @@
             <!-- 4. Kehlleiste -->
             <div>
               <p class="text-[10px] uppercase tracking-widest mb-2 font-medium text-[#907B71]">4. Kehlleiste</p>
-              <div id="container-kehlleisten" class="flex overflow-x-auto gap-3 py-2 px-1 -mx-1 snap-x hide-scrollbar cursor-grab">
+              <div id="container-kehlleisten" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab">
                 <!-- Wird per JS generiert -->
               </div>
             </div>
@@ -384,26 +392,47 @@
     const katalogData = {
       // 1. Kategorien für Fronten
       frontKategorien: [
-        { id: "kat-matt", name: "Mattlack" },
-        { id: "kat-furnier", name: "Furnier" }
+        { id: "kat-uni", name: "Uni" },
+        { id: "kat-resopal", name: "Resopal" },
+        { id: "kat-smart", name: "Smart" }
       ],
       fronten: [
-        // 12x Mattlack Muster
-        { id: "f1", name: "Sand Matt", bg: "#907B71", img: "none", cat: "kat-matt" },
-        { id: "f2", name: "Weiß Matt", bg: "#F8F9FA", img: "none", cat: "kat-matt" },
-        { id: "f3", name: "Onyx Matt", bg: "#2E2A28", img: "none", cat: "kat-matt" },
-        { id: "f4", name: "Lichtgrau", bg: "#D1D5DB", img: "none", cat: "kat-matt" },
-        { id: "f5", name: "Salbei", bg: "#8A9A86", img: "none", cat: "kat-matt" },
-        { id: "f6", name: "Nachtblau", bg: "#1C2A39", img: "none", cat: "kat-matt" },
-        { id: "f7", name: "Terracotta", bg: "#C17753", img: "none", cat: "kat-matt" },
-        { id: "f8", name: "Schilf", bg: "#AAB39B", img: "none", cat: "kat-matt" },
-        { id: "f9", name: "Fjordblau", bg: "#4A6274", img: "none", cat: "kat-matt" },
-        { id: "f10", name: "Steingrau", bg: "#7A7B76", img: "none", cat: "kat-matt" },
-        { id: "f11", name: "Muschel", bg: "#E5E1D8", img: "none", cat: "kat-matt" },
-        { id: "f12", name: "Schwarz", bg: "#111111", img: "none", cat: "kat-matt" },
-        // Zweite Kategorie
-        { id: "f13", name: "Nussbaum", bg: "#5C4033", img: "none", cat: "kat-furnier" },
-        { id: "f14", name: "Eiche Hell", bg: "#D4A373", img: "none", cat: "kat-furnier" }
+        // 9x Uni Muster
+        { id: "f1", name: "Achatweiß", bg: "#F5F5F5", img: "url('images/front_uni/achatweiss.jpg')", cat: "kat-uni" },
+        { id: "f2", name: "Art Pepper", bg: "#8D8B88", img: "url('images/front_uni/artpepper.jpg')", cat: "kat-uni" },
+        { id: "f3", name: "Fango", bg: "#7A736B", img: "url('images/front_uni/fango.jpg')", cat: "kat-uni" },
+        { id: "f4", name: "Light Nude", bg: "#E8D8C9", img: "url('images/front_uni/lightnude.jpg')", cat: "kat-uni" },
+        { id: "f5", name: "Light Pepper", bg: "#B5B2AF", img: "url('images/front_uni/lightpepper.jpg')", cat: "kat-uni" },
+        { id: "f6", name: "Macaron", bg: "#D9C9B9", img: "url('images/front_uni/macaron.jpg')", cat: "kat-uni" },
+        { id: "f7", name: "Premiumweiß", bg: "#FFFFFF", img: "url('images/front_uni/premiumweiss.jpg')", cat: "kat-uni" },
+        { id: "f8", name: "Schneeweiß", bg: "#FDFDFD", img: "url('images/front_uni/schneeweiss.jpg')", cat: "kat-uni" },
+        { id: "f9", name: "Yoko Silk", bg: "#EAE6E1", img: "url('images/front_uni/yokosilk.jpg')", cat: "kat-uni" },
+
+        // 10x Resopal Muster
+        { id: "f10", name: "Brown Powder", bg: "#D8CDBE", img: "url('images/front_resopal/brownpowder.jpg')", cat: "kat-resopal" },
+        { id: "f11", name: "Cool White", bg: "#F4F4F4", img: "url('images/front_resopal/coolwhite.jpg')", cat: "kat-resopal" },
+        { id: "f12", name: "Dark Powder", bg: "#8C837B", img: "url('images/front_resopal/darkpowder.jpg')", cat: "kat-resopal" },
+        { id: "f13", name: "Jura Grey", bg: "#A0A0A0", img: "url('images/front_resopal/juragrey.jpg')", cat: "kat-resopal" },
+        { id: "f14", name: "Light Powder", bg: "#E5DFD5", img: "url('images/front_resopal/lightpowder.jpg')", cat: "kat-resopal" },
+        { id: "f15", name: "Macaron", bg: "#D9C9B9", img: "url('images/front_resopal/macaron.jpg')", cat: "kat-resopal" },
+        { id: "f16", name: "Moonlight Green", bg: "#7A8C84", img: "url('images/front_resopal/moonlightgreen.jpg')", cat: "kat-resopal" },
+        { id: "f17", name: "Nature Powder", bg: "#C6BAA8", img: "url('images/front_resopal/naturepowder.jpg')", cat: "kat-resopal" },
+        { id: "f18", name: "Premiumweiß", bg: "#FFFFFF", img: "url('images/front_resopal/premiumweiss.jpg')", cat: "kat-resopal" },
+        { id: "f19", name: "Schwarz", bg: "#111111", img: "url('images/front_resopal/schwarz.jpg')", cat: "kat-resopal" },
+
+        // 12x Smart Muster
+        { id: "f20", name: "Achatweiß", bg: "#F5F5F5", img: "url('images/front_smart/achatweiss.jpg')", cat: "kat-smart" },
+        { id: "f21", name: "Black Metallic", bg: "#2A2A2A", img: "url('images/front_smart/blackmetallic.jpg')", cat: "kat-smart" },
+        { id: "f22", name: "Bronze", bg: "#CD7F32", img: "url('images/front_smart/bronze.jpg')", cat: "kat-smart" },
+        { id: "f23", name: "Champagner", bg: "#F7E7CE", img: "url('images/front_smart/champagner.jpg')", cat: "kat-smart" },
+        { id: "f24", name: "Creme", bg: "#FFFDD0", img: "url('images/front_smart/creme.jpg')", cat: "kat-smart" },
+        { id: "f25", name: "Grey", bg: "#808080", img: "url('images/front_smart/grey.jpg')", cat: "kat-smart" },
+        { id: "f26", name: "Karbon Metallic", bg: "#4A4A4A", img: "url('images/front_smart/karbonmetallic.jpg')", cat: "kat-smart" },
+        { id: "f27", name: "Pastell Sun", bg: "#FDF0D5", img: "url('images/front_smart/pastellsun.jpg')", cat: "kat-smart" },
+        { id: "f28", name: "Sandstein", bg: "#D2B48C", img: "url('images/front_smart/sandstein.jpg')", cat: "kat-smart" },
+        { id: "f29", name: "Schneeweiß", bg: "#FDFDFD", img: "url('images/front_smart/schneeweiss.jpg')", cat: "kat-smart" },
+        { id: "f30", name: "Schwarz", bg: "#000000", img: "url('images/front_smart/schwarz.jpg')", cat: "kat-smart" },
+        { id: "f31", name: "Silk", bg: "#EAE6E1", img: "url('images/front_smart/silk.jpg')", cat: "kat-smart" }
       ],
       // 2. Kategorien für Arbeitsplatten
       aplKategorien: [
@@ -411,38 +440,74 @@
         { id: "kat-stein", name: "Naturstein" }
       ],
       arbeitsplatten: [
-        // 12x Schichtstoff Muster
-        { id: "a1", name: "Keramik Weiß", bg: "#F8F9FA", img: "none", cat: "kat-schichtstoff" },
-        { id: "a2", name: "Betonoptik", bg: "#83898E", img: "none", cat: "kat-schichtstoff" },
-        { id: "a3", name: "Eiche Natur", bg: "#C69C6D", img: "none", cat: "kat-schichtstoff" },
-        { id: "a4", name: "Rost", bg: "#8B4513", img: "none", cat: "kat-schichtstoff" },
-        { id: "a5", name: "Schiefer", bg: "#2F4F4F", img: "none", cat: "kat-schichtstoff" },
-        { id: "a6", name: "Stahlgrau", bg: "#A9A9A9", img: "none", cat: "kat-schichtstoff" },
-        { id: "a7", name: "Marmor Hell", bg: "#F0EBE1", img: "none", cat: "kat-schichtstoff" },
-        { id: "a8", name: "Marmor Dunkel", bg: "#222222", img: "none", cat: "kat-schichtstoff" },
-        { id: "a9", name: "Kupfer", bg: "#B87333", img: "none", cat: "kat-schichtstoff" },
-        { id: "a10", name: "Beton Dunkel", bg: "#5C6063", img: "none", cat: "kat-schichtstoff" },
-        { id: "a11", name: "Eiche Rauch", bg: "#8B6B4A", img: "none", cat: "kat-schichtstoff" },
-        { id: "a12", name: "Gletscher", bg: "#EAF2F8", img: "none", cat: "kat-schichtstoff" },
-        // Naturstein
-        { id: "n1", name: "Nero Assoluto", bg: "#2E2A28", img: "none", cat: "kat-stein" },
-        { id: "n2", name: "Bianco Carrara", bg: "#EAE6E1", img: "none", cat: "kat-stein" },
-        { id: "n3", name: "Taj Mahal", bg: "#D3CDBF", img: "none", cat: "kat-stein" }
+        // 18x Schichtstoff Muster
+        { id: "a1", name: "Bergeiche", bg: "#C69C6D", img: "url('images/arbeitsplatten/bergeiche.jpg')", cat: "kat-schichtstoff" },
+        { id: "a2", name: "Castelleiche", bg: "#A67B5B", img: "url('images/arbeitsplatten/castelleiche.jpg')", cat: "kat-schichtstoff" },
+        { id: "a3", name: "Classic Oak", bg: "#C89D7C", img: "url('images/arbeitsplatten/classicoak.jpg')", cat: "kat-schichtstoff" },
+        { id: "a4", name: "Cupria", bg: "#B87333", img: "url('images/arbeitsplatten/cupria.jpg')", cat: "kat-schichtstoff" },
+        { id: "a5", name: "Dark Empress", bg: "#4A4A4A", img: "url('images/arbeitsplatten/darkempress.jpg')", cat: "kat-schichtstoff" },
+        { id: "a6", name: "Dark Maron", bg: "#3E2723", img: "url('images/arbeitsplatten/darkmaron.jpg')", cat: "kat-schichtstoff" },
+        { id: "a7", name: "Diamond Oak", bg: "#8B6B4A", img: "url('images/arbeitsplatten/diamondoak.jpg')", cat: "kat-schichtstoff" },
+        { id: "a8", name: "Edelnussbaum", bg: "#6E4C33", img: "url('images/arbeitsplatten/edelnussbaum.jpg')", cat: "kat-schichtstoff" },
+        { id: "a9", name: "Ferro Schwarzgold", bg: "#2E2A28", img: "url('images/arbeitsplatten/ferroschwarzgold.jpg')", cat: "kat-schichtstoff" },
+        { id: "a10", name: "Kristallmarmor", bg: "#F8F9FA", img: "url('images/arbeitsplatten/kristallmarmor.jpg')", cat: "kat-schichtstoff" },
+        { id: "a11", name: "Mountainwood", bg: "#8B5A2B", img: "url('images/arbeitsplatten/mountainwood.jpg')", cat: "kat-schichtstoff" },
+        { id: "a12", name: "Mountainwood 2", bg: "#8B5A2B", img: "url('images/arbeitsplatten/moutainwood.jpg')", cat: "kat-schichtstoff" },
+        { id: "a13", name: "Neo Rustico", bg: "#8B4513", img: "url('images/arbeitsplatten/neorustico.jpg')", cat: "kat-schichtstoff" },
+        { id: "a14", name: "Onyx Natur", bg: "#D3CDBF", img: "url('images/arbeitsplatten/onyxnatur.jpg')", cat: "kat-schichtstoff" },
+        { id: "a15", name: "Piemonteiche", bg: "#A0522D", img: "url('images/arbeitsplatten/piemonteiche.jpg')", cat: "kat-schichtstoff" },
+        { id: "a16", name: "Roxano", bg: "#708090", img: "url('images/arbeitsplatten/roxano.jpg')", cat: "kat-schichtstoff" },
+        { id: "a17", name: "Royal Oak", bg: "#8B6B4A", img: "url('images/arbeitsplatten/royaloak.jpg')", cat: "kat-schichtstoff" },
+        { id: "a18", name: "Taj Mahal", bg: "#D3CDBF", img: "url('images/arbeitsplatten/tajmahal.jpg')", cat: "kat-schichtstoff" },
+        
+        // 14x Naturstein Muster
+        { id: "n1", name: "Bianco Cristallo", bg: "#F8F9FA", img: "url('images/naturstein/bianco-cristallo.jpg')", cat: "kat-stein" },
+        { id: "n2", name: "Breccia Imperiale", bg: "#8B7355", img: "url('images/naturstein/breccia-imperiale.jpg')", cat: "kat-stein" },
+        { id: "n3", name: "Cafe Imperial", bg: "#4A3525", img: "url('images/naturstein/cafe-imperial.JPG')", cat: "kat-stein" },
+        { id: "n4", name: "Imperial White", bg: "#F0EBE1", img: "url('images/naturstein/imperial-white.jpg')", cat: "kat-stein" },
+        { id: "n5", name: "Ivory Fantasy", bg: "#EAE6E1", img: "url('images/naturstein/ivory-fantasy.jpg')", cat: "kat-stein" },
+        { id: "n6", name: "Marinace Nero", bg: "#2E2A28", img: "url('images/naturstein/marinace-nero.jpg')", cat: "kat-stein" },
+        { id: "n7", name: "Mont Blanc", bg: "#E8E5E3", img: "url('images/naturstein/mont-blanc.jpg')", cat: "kat-stein" },
+        { id: "n8", name: "Nero Assoluto", bg: "#1A1A1A", img: "url('images/naturstein/nero-assoluto.jpg')", cat: "kat-stein" },
+        { id: "n9", name: "Star Galaxy", bg: "#111111", img: "url('images/naturstein/star-galaxy.jpg')", cat: "kat-stein" },
+        { id: "n10", name: "Steel Grey", bg: "#5C5C5C", img: "url('images/naturstein/steel-grey.jpeg')", cat: "kat-stein" },
+        { id: "n11", name: "Taj Mahal", bg: "#D3CDBF", img: "url('images/naturstein/taj-mahal.jpg')", cat: "kat-stein" },
+        { id: "n12", name: "Tropical Storm", bg: "#2F4F4F", img: "url('images/naturstein/tropical-storm.jpg')", cat: "kat-stein" },
+        { id: "n13", name: "Via Lattea", bg: "#22252A", img: "url('images/naturstein/via-lattea.jpg')", cat: "kat-stein" },
+        { id: "n14", name: "Virginia Black", bg: "#1A1A1A", img: "url('images/naturstein/virginia-black.jpg')", cat: "kat-stein" }
       ],
-      // 3. Korpus Dekore (12x)
+      // 3. Kategorien für Korpus
+      korpusKategorien: [
+        { id: "kat-uni", name: "Uni" },
+        { id: "kat-holz", name: "Holzoptik" }
+      ],
       korpus: [
-        { id: "k1", name: "Kristallweiß", bg: "#F8F9FA", img: "none" },
-        { id: "k2", name: "Lichtgrau", bg: "#D1D5DB", img: "none" },
-        { id: "k3", name: "Lavagrau", bg: "#5A5A5A", img: "none" },
-        { id: "k4", name: "Sahara", bg: "#E1D5C9", img: "none" },
-        { id: "k5", name: "Steingrau", bg: "#8B8C89", img: "none" },
-        { id: "k6", name: "Schwarz", bg: "#1C1C1C", img: "none" },
-        { id: "k7", name: "Eiche Hell", bg: "#D4B895", img: "none" },
-        { id: "k8", name: "Nussbaum", bg: "#6E4C33", img: "none" },
-        { id: "k9", name: "Kaschmir", bg: "#C6BCAE", img: "none" },
-        { id: "k10", name: "Taupe", bg: "#8D8075", img: "none" },
-        { id: "k11", name: "Ozeanblau", bg: "#364F6B", img: "none" },
-        { id: "k12", name: "Moosgrün", bg: "#4A5D23", img: "none" }
+        // 12x Uni
+        { id: "k1", name: "Achatweiß", bg: "#F5F5F5", img: "url('images/korpus/achatweiss.jpg')", cat: "kat-uni" },
+        { id: "k2", name: "Art Pepper", bg: "#8D8B88", img: "url('images/korpus/artpepper.jpg')", cat: "kat-uni" },
+        { id: "k3", name: "Fango", bg: "#7A736B", img: "url('images/korpus/fango.jpg')", cat: "kat-uni" },
+        { id: "k4", name: "Graphitschwarz", bg: "#2A2A2A", img: "url('images/korpus/graphitschwarz.jpg')", cat: "kat-uni" },
+        { id: "k5", name: "Lichtgrau", bg: "#D1D5DB", img: "url('images/korpus/lichtgrau.jpg')", cat: "kat-uni" },
+        { id: "k6", name: "Light Nude", bg: "#E8D8C9", img: "url('images/korpus/lightnude.jpg')", cat: "kat-uni" },
+        { id: "k7", name: "Light Pepper", bg: "#B5B2AF", img: "url('images/korpus/lightpepper.jpg')", cat: "kat-uni" },
+        { id: "k8", name: "Macaron", bg: "#D9C9B9", img: "url('images/korpus/macaron.jpg')", cat: "kat-uni" },
+        { id: "k9", name: "Premiumweiß", bg: "#FFFFFF", img: "url('images/korpus/premiumweiss.jpg')", cat: "kat-uni" },
+        { id: "k10", name: "Schneeweiß", bg: "#FDFDFD", img: "url('images/korpus/schneeweiss.jpg')", cat: "kat-uni" },
+        { id: "k11", name: "Schwarz", bg: "#111111", img: "url('images/korpus/schwarz.jpg')", cat: "kat-uni" },
+        { id: "k12", name: "Yoko Silk", bg: "#EAE6E1", img: "url('images/korpus/yokosilk.jpg')", cat: "kat-uni" },
+        
+        // 11x Holzoptik
+        { id: "k13", name: "Bergeiche", bg: "#C69C6D", img: "url('images/korpusholz/bergeiche.jpg')", cat: "kat-holz" },
+        { id: "k14", name: "Castelleiche", bg: "#A67B5B", img: "url('images/korpusholz/castelleiche.jpg')", cat: "kat-holz" },
+        { id: "k15", name: "Classic Oak", bg: "#C89D7C", img: "url('images/korpusholz/classicoak.jpg')", cat: "kat-holz" },
+        { id: "k16", name: "Dark Maron", bg: "#3E2723", img: "url('images/korpusholz/darkmaron.jpg')", cat: "kat-holz" },
+        { id: "k17", name: "Diamond Oak", bg: "#8B6B4A", img: "url('images/korpusholz/diamondoak.jpg')", cat: "kat-holz" },
+        { id: "k18", name: "Edelnussbaum", bg: "#6E4C33", img: "url('images/korpusholz/edelnussbaum.jpg')", cat: "kat-holz" },
+        { id: "k19", name: "Mountainwood", bg: "#8B5A2B", img: "url('images/korpusholz/mountainwood.jpg')", cat: "kat-holz" },
+        { id: "k20", name: "Mountainwood 2", bg: "#8B5A2B", img: "url('images/korpusholz/moutainwood.jpg')", cat: "kat-holz" },
+        { id: "k21", name: "Neo Rustico", bg: "#8B4513", img: "url('images/korpusholz/neorustico.jpg')", cat: "kat-holz" },
+        { id: "k22", name: "Piemonteiche", bg: "#A0522D", img: "url('images/korpusholz/piemonteiche.jpg')", cat: "kat-holz" },
+        { id: "k23", name: "Royal Oak", bg: "#8B6B4A", img: "url('images/korpusholz/royaloak.jpg')", cat: "kat-holz" }
       ],
       // 4. Kehlleisten (12x)
       kehlleisten: [
@@ -468,229 +533,3 @@
     };
 
     // Hilfsfunktion zum Rendern einer Kachel
-    const createTile = (item, index, btnClass, dataType, cssBg, cssImg) => {
-      const bgAttr = cssBg ? `data-bg="${item.bg}"` : `data-color="${item.color}"`;
-      const imgAttr = cssImg ? `data-img="${item.img}"` : '';
-      const bgColor = item.bg || item.color;
-      
-      return `
-        <button class="config-btn ${btnClass} flex-none w-16 sm:w-20 relative aspect-square rounded-md border border-black/10 overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-md snap-start ${index === 0 ? 'active' : ''}" data-type="${dataType}" ${bgAttr} ${imgAttr} style="background-color: ${bgColor}; ${item.img && item.img !== 'none' ? `background-image: ${item.img};` : ''} background-size: cover;">
-          <div class="absolute inset-x-0 bottom-0 bg-white/95 p-1 translate-y-full group-hover:translate-y-0 transition-transform duration-300 border-t border-black/5">
-            <span class="text-[8px] uppercase tracking-wider text-[#2E2A28] block truncate text-center">${item.name}</span>
-          </div>
-        </button>
-      `;
-    };
-
-    // --- RENDER LOGIK FÜR DAS STUDIO ---
-    const initKatalog = () => {
-      // 1. Front-Kategorien generieren
-      document.getElementById('container-front-kategorien').innerHTML = katalogData.frontKategorien.map((cat, index) => `
-        <button class="cat-btn text-[10px] uppercase tracking-wider px-3 py-1 rounded border border-black/20 ${index === 0 ? 'active-cat' : 'text-gray-500 hover:border-black/50'}" data-group="front" data-target-cat="${cat.id}">
-          ${cat.name}
-        </button>
-      `).join('');
-
-      renderFronten(katalogData.frontKategorien[0].id);
-
-      // 2. APL-Kategorien generieren
-      document.getElementById('container-apl-kategorien').innerHTML = katalogData.aplKategorien.map((cat, index) => `
-        <button class="cat-btn text-[10px] uppercase tracking-wider px-3 py-1 rounded border border-black/20 ${index === 0 ? 'active-cat' : 'text-gray-500 hover:border-black/50'}" data-group="apl" data-target-cat="${cat.id}">
-          ${cat.name}
-        </button>
-      `).join('');
-
-      renderArbeitsplatten(katalogData.aplKategorien[0].id);
-
-      // 3. Korpus generieren
-      document.getElementById('container-korpus').innerHTML = katalogData.korpus.map((item, index) => 
-        createTile(item, index, 'korpus-btn', 'korpus', true, true)
-      ).join('');
-
-      if(katalogData.korpus.length > 0) {
-         document.documentElement.style.setProperty('--korpus-color', katalogData.korpus[0].bg);
-         document.documentElement.style.setProperty('--korpus-image', katalogData.korpus[0].img);
-      }
-
-      // 4. Kehlleisten generieren
-      document.getElementById('container-kehlleisten').innerHTML = katalogData.kehlleisten.map((item, index) => 
-        createTile(item, index, 'grp-btn', 'grp', false, false)
-      ).join('');
-
-      // 5. Stil-Welten generieren
-      document.getElementById('container-stil-btns').innerHTML = katalogData.stilwelten.map((item, index) => `
-        <button class="stil-btn w-full text-left p-6 rounded-xl border border-black/10 hover:border-[#D4A373] hover:bg-white transition-all group ${index === 0 ? 'active-stil border-[#D4A373] bg-white shadow-sm' : ''}" data-target="img-${item.id}">
-          <h4 class="text-sm uppercase tracking-widest font-medium text-[#2E2A28] mb-1 group-hover:text-[#D4A373]">${item.title}</h4>
-          <p class="text-xs opacity-60">${item.desc}</p>
-        </button>
-      `).join('');
-
-      document.getElementById('container-stil-images').innerHTML = katalogData.stilwelten.map((item, index) => `
-        <div id="img-${item.id}" class="stil-image absolute inset-8 rounded-xl shadow-xl flex items-center justify-center border border-black/5 transition-opacity duration-800 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'} bg-cover bg-center" style="background-color: ${item.bg}; background-image: ${item.img};">
-          <div class="text-center p-4 rounded backdrop-blur ${item.textColor}">
-            <i data-lucide="image" class="w-8 h-8 mx-auto mb-2"></i>
-            <span class="text-xs uppercase tracking-widest">${item.label}</span>
-          </div>
-        </div>
-      `).join('');
-
-      bindCategoryEvents();
-      bindConfigEvents();
-      bindStilEvents();
-      bindDragToScroll(); // Drag-Funktion initialisieren
-      lucide.createIcons();
-    };
-
-    // --- Drag to Scroll Logik (Desktop) ---
-    let isDragging = false; // Globale Variable, um Klicks beim Ziehen zu verhindern
-
-    const bindDragToScroll = () => {
-      const sliders = document.querySelectorAll('.hide-scrollbar');
-      let isDown = false;
-      let startX;
-      let scrollLeft;
-
-      sliders.forEach(slider => {
-        slider.addEventListener('mousedown', (e) => {
-          isDown = true;
-          isDragging = false;
-          slider.classList.remove('cursor-grab');
-          slider.classList.add('cursor-grabbing');
-          startX = e.pageX - slider.offsetLeft;
-          scrollLeft = slider.scrollLeft;
-        });
-        
-        slider.addEventListener('mouseleave', () => {
-          isDown = false;
-          slider.classList.remove('cursor-grabbing');
-          slider.classList.add('cursor-grab');
-        });
-        
-        slider.addEventListener('mouseup', () => {
-          isDown = false;
-          slider.classList.remove('cursor-grabbing');
-          slider.classList.add('cursor-grab');
-          // Setze isDragging nach einer kurzen Verzögerung zurück, damit der Klick nicht feuert
-          setTimeout(() => { isDragging = false; }, 50);
-        });
-        
-        slider.addEventListener('mousemove', (e) => {
-          if (!isDown) return;
-          e.preventDefault();
-          isDragging = true; // Wir ziehen gerade, Klicks blockieren!
-          const x = e.pageX - slider.offsetLeft;
-          const walk = (x - startX) * 2; // Scroll-Geschwindigkeit
-          slider.scrollLeft = scrollLeft - walk;
-        });
-      });
-    };
-
-    // --- Sub-Render-Funktionen ---
-    const renderFronten = (catId) => {
-      const gefilterteFronten = katalogData.fronten.filter(front => front.cat === catId);
-      document.getElementById('container-fronten').innerHTML = gefilterteFronten.map((item, index) => 
-        createTile(item, index, 'front-btn', 'front', true, true)
-      ).join('');
-
-      if(gefilterteFronten.length > 0) {
-         document.documentElement.style.setProperty('--front-bg', gefilterteFronten[0].bg);
-         document.documentElement.style.setProperty('--front-image', gefilterteFronten[0].img);
-      }
-    };
-
-    const renderArbeitsplatten = (catId) => {
-      const gefilterteAPL = katalogData.arbeitsplatten.filter(apl => apl.cat === catId);
-      document.getElementById('container-arbeitsplatten').innerHTML = gefilterteAPL.map((item, index) => 
-        createTile(item, index, 'apl-btn', 'apl', true, true)
-      ).join('');
-
-      if(gefilterteAPL.length > 0) {
-         document.documentElement.style.setProperty('--apl-bg', gefilterteAPL[0].bg);
-         document.documentElement.style.setProperty('--apl-image', gefilterteAPL[0].img);
-      }
-    };
-
-    // --- Event Bindings ---
-    const bindCategoryEvents = () => {
-      const catBtns = document.querySelectorAll('.cat-btn');
-      catBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const group = btn.getAttribute('data-group');
-          const targetCat = btn.getAttribute('data-target-cat');
-
-          const groupBtns = document.querySelectorAll(`.cat-btn[data-group="${group}"]`);
-          groupBtns.forEach(b => {
-             b.classList.remove('active-cat');
-             b.classList.add('text-gray-500', 'hover:border-black/50');
-          });
-          btn.classList.add('active-cat');
-          btn.classList.remove('text-gray-500', 'hover:border-black/50');
-
-          if (group === 'front') {
-            renderFronten(targetCat);
-            handleConfigClick('.front-btn', '--front-bg', '--front-image');
-            bindDragToScroll(); // Nach dem Neu-Rendern Events wieder anheften
-          } else if (group === 'apl') {
-            renderArbeitsplatten(targetCat);
-            handleConfigClick('.apl-btn', '--apl-bg', '--apl-image');
-            bindDragToScroll(); // Nach dem Neu-Rendern Events wieder anheften
-          }
-        });
-      });
-    };
-
-    const handleConfigClick = (buttonsClass, cssVarBg, cssVarImg, isColorOnly = false) => {
-      const buttons = document.querySelectorAll(buttonsClass);
-      buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          // WICHTIG: Wenn auf dem PC gerade horizontal gescrollt wurde, den Klick ignorieren!
-          if (isDragging) return;
-
-          buttons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-
-          if (isColorOnly) {
-            document.documentElement.style.setProperty(cssVarBg, btn.getAttribute('data-color'));
-          } else {
-            document.documentElement.style.setProperty(cssVarBg, btn.getAttribute('data-bg'));
-            document.documentElement.style.setProperty(cssVarImg, btn.getAttribute('data-img'));
-          }
-        });
-      });
-    };
-
-    const bindConfigEvents = () => {
-      handleConfigClick('.front-btn', '--front-bg', '--front-image');
-      handleConfigClick('.apl-btn', '--apl-bg', '--apl-image');
-      handleConfigClick('.korpus-btn', '--korpus-color', '--korpus-image');
-      handleConfigClick('.grp-btn', '--grp-color', null, true);
-    };
-
-    const bindStilEvents = () => {
-      const stilBtns = document.querySelectorAll('.stil-btn');
-      const stilImages = document.querySelectorAll('.stil-image');
-
-      stilBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          stilBtns.forEach(b => b.classList.remove('border-[#D4A373]', 'bg-white', 'shadow-sm'));
-          btn.classList.add('border-[#D4A373]', 'bg-white', 'shadow-sm');
-
-          stilImages.forEach(img => {
-            img.classList.remove('opacity-100', 'z-10');
-            img.classList.add('opacity-0', 'z-0');
-          });
-
-          const targetId = btn.getAttribute('data-target');
-          const targetImg = document.getElementById(targetId);
-          targetImg.classList.remove('opacity-0', 'z-0');
-          targetImg.classList.add('opacity-100', 'z-10');
-        });
-      });
-    };
-
-    // Initialisierung starten
-    initKatalog();
-
-  </script>
-</body>
-</html>
