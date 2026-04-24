@@ -1,53 +1,459 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belmonte Portfolio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-        }
-        h1 { margin-bottom: 0.5rem; }
-        p { color: #666; margin-bottom: 1.5rem; }
-        .links { display: flex; flex-direction: column; gap: 10px; }
-        .btn {
-            text-decoration: none;
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        .btn:hover { background-color: #0056b3; }
-    </style>
-</head>
-<body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enrico Belmonte - Küchenfachberater & Raumgestalter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* --- CSS Variablen für Konfigurator --- */
+    :root {
+      --front-bg: #907B71;
+      --front-image: none;
+      --apl-bg: #F8F9FA;
+      --apl-image: none;
+      --grp-color: #1A1A1A;
+    }
 
-    <div class="card">
-        <h1>Digitale Visitenkarte</h1>
-        <p>Willkommen! Hier findest du meine WebApps:</p>
+    body {
+      background-color: #F4F1F0;
+      color: #2E2A28;
+    }
+
+    /* --- Swatch Accordion (Materialfächer) --- */
+    .swatch-container { display: flex; width: 100%; gap: 2px; }
+    .swatch { flex: 1; transition: flex 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease; cursor: pointer; position: relative; }
+    .swatch:hover { flex: 4; }
+    .config-btn.active { box-shadow: inset 0 0 0 2px rgba(255,255,255,0.4), inset 0 0 0 4px #2E2A28; z-index: 10; }
+    .swatch-label { opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
+    .swatch:hover .swatch-label { opacity: 1; transition-delay: 0.15s; }
+
+    /* --- Flat Lay Collage Styles --- */
+    .flatlay-apl {
+      background-color: var(--apl-bg);
+      background-image: var(--apl-image);
+      background-size: cover;
+      transition: background-color 0.5s ease;
+    }
+    .flatlay-grp {
+      background-color: var(--grp-color);
+      transition: background-color 0.5s ease;
+    }
+    .flatlay-front {
+      background-color: var(--front-bg);
+      background-image: var(--front-image);
+      background-size: cover;
+      transition: background-color 0.5s ease;
+    }
+
+    /* --- Stil-Welten Image Transition --- */
+    .stil-image {
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    /* Hover Lift für allgemeine Elemente */
+    .hover-lift { transition: transform 0.3s ease; }
+    .hover-lift:hover { transform: translateY(-4px); }
+  </style>
+</head>
+<body class="min-h-screen font-sans font-light selection:bg-[#D4A373] selection:text-white relative overflow-x-hidden">
+
+  <!-- =========================================
+       HAUPTSEITE: PORTFOLIO & VISITENKARTE
+       ========================================= -->
+       
+  <nav class="p-6 md:px-12 flex justify-between items-center border-b border-black/10">
+    <span class="text-sm font-medium tracking-widest uppercase">fs küchen manufaktur Schulz GmbH</span>
+    <span class="text-xs tracking-wide flex items-center gap-2"><i data-lucide="map-pin" class="w-3 h-3"></i> Balingen</span>
+  </nav>
+
+  <main class="max-w-6xl mx-auto">
+    <section class="grid md:grid-cols-2 min-h-[70vh] border-b border-black/10">
+      <div class="p-8 md:p-16 flex flex-col justify-center order-2 md:order-1 border-t md:border-t-0 md:border-r border-black/10">
+        <p class="text-xs uppercase tracking-widest mb-6 text-[#907B71]">Portfolio & Kontakt</p>
+        <h1 class="text-5xl md:text-7xl font-normal tracking-tight mb-6 leading-tight">
+          Räume neu <br /> <span class="italic text-[#907B71]">erleben.</span>
+        </h1>
+        <p class="text-lg leading-relaxed opacity-80 max-w-md mb-10">
+          Hallo, ich bin Enrico Belmonte, Küchenfachberater & Ausbilder. Die Küche ist mehr als ein Arbeitsplatz – sie ist das Herzstück des Zuhauses. Mit präziser 3D-Planung und einem Auge für Details gestalte ich Räume, die Ergonomie und Ästhetik perfekt vereinen.
+        </p>
         
-        <div class="links">
-            <a href="/lithoscale" class="btn">LithoScale öffnen</a>
-            <a href="/kitcommand" class="btn">KitCommand öffnen</a>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="mailto:belmonte@fs-kuechen.de" class="inline-flex items-center justify-center gap-4 border border-[#907B71] px-6 py-3 transition-all hover:bg-[#907B71] hover:text-[#F4F1F0] group">
+            <span class="text-sm tracking-wide uppercase">Projekt starten</span>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" stroke-width="1"></i>
+          </a>
+          <button id="open-studio-btn" class="inline-flex items-center justify-center gap-4 border border-black/20 px-6 py-3 transition-all hover:bg-[#D4A373] hover:text-[#F4F1F0] hover:border-[#D4A373] group bg-white/50">
+            <span class="text-sm tracking-wide uppercase font-medium">Studio betreten</span>
+            <i data-lucide="sparkles" class="w-4 h-4 group-hover:scale-110 transition-transform" stroke-width="1.5"></i>
+          </button>
         </div>
+      </div>
+
+      <div class="order-1 md:order-2 bg-[#907B71]/10 flex items-center justify-center min-h-[40vh] md:min-h-full relative overflow-hidden group">
+        <div class="text-center opacity-40 relative z-10">
+          <i data-lucide="camera" class="w-8 h-8 mx-auto mb-2" stroke-width="1"></i>
+          <span class="text-sm tracking-widest uppercase">Profilbild Portrait</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-black/10">
+      <div class="p-8 md:px-16 md:py-12 border-b border-black/10">
+        <h2 class="text-2xl tracking-wide">Ausstellung & Referenzen</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3">
+        <div class="md:col-span-2 aspect-[4/3] md:aspect-auto bg-[#907B71]/5 border-b md:border-b-0 md:border-r border-black/10 relative flex items-center justify-center group hover:bg-[#907B71]/10 transition-colors cursor-pointer">
+          <span class="text-xs tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity relative z-10">Referenzbild 1 (Querformat)</span>
+        </div>
+        <div class="grid grid-rows-2">
+          <div class="aspect-square md:aspect-auto bg-[#D4A373]/10 border-b border-black/10 relative flex items-center justify-center group hover:bg-[#D4A373]/20 transition-colors cursor-pointer">
+            <span class="text-xs tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity relative z-10">Detailansicht / Material</span>
+          </div>
+          <div class="aspect-square md:aspect-auto bg-[#907B71]/10 relative flex items-center justify-center group hover:bg-[#907B71]/20 transition-colors cursor-pointer">
+            <span class="text-xs tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity relative z-10">CARAT 3D-Render</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-3 border-b border-black/10">
+      <div class="p-8 md:p-16 md:border-r border-b md:border-b-0 border-black/10">
+        <h2 class="text-2xl tracking-wide mb-4">Mein Ansatz</h2>
+        <p class="opacity-70 text-sm leading-relaxed">
+          Jedes Projekt beginnt mit einem leeren Blatt und deinen Wünschen. Durch strukturierte Planungsschritte sorge ich dafür, dass das Endergebnis genau deinen Vorstellungen entspricht.
+        </p>
+      </div>
+      <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2">
+        <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors sm:border-r border-b border-black/10">
+          <span class="text-xs font-medium text-[#D4A373]">01</span>
+          <h3 class="text-lg tracking-wide mt-2 mb-2">Bedarfsanalyse</h3>
+          <p class="text-sm opacity-60 leading-relaxed">Verständnis für deine Kochgewohnheiten und Laufwege.</p>
+        </div>
+        <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors border-b border-black/10">
+          <span class="text-xs font-medium text-[#D4A373]">02</span>
+          <h3 class="text-lg tracking-wide mt-2 mb-2">3D-Planung</h3>
+          <p class="text-sm opacity-60 leading-relaxed">Fotorealistische Visualisierung mit CARAT.</p>
+        </div>
+        <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors sm:border-r border-black/10">
+          <span class="text-xs font-medium text-[#D4A373]">03</span>
+          <h3 class="text-lg tracking-wide mt-2 mb-2">Materialkonzept</h3>
+          <p class="text-sm opacity-60 leading-relaxed">Harmonische Abstimmung von Fronten, Arbeitsplatten und Licht.</p>
+        </div>
+        <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors">
+          <span class="text-xs font-medium text-[#D4A373]">04</span>
+          <h3 class="text-lg tracking-wide mt-2 mb-2">Projektleitung</h3>
+          <p class="text-sm opacity-60 leading-relaxed">Vom ersten Aufmaß bis zur finalen Montage.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="p-8 md:p-16 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex gap-6">
+        <a href="mailto:belmonte@fs-kuechen.de" class="text-sm opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">
+          <i data-lucide="mail" class="w-4 h-4" stroke-width="1.5"></i> E-Mail
+        </a>
+        <a href="tel:+49743399851311" class="text-sm opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">
+          <i data-lucide="phone" class="w-4 h-4" stroke-width="1.5"></i> Telefon
+        </a>
+      </div>
+      <div class="flex gap-6">
+        <a href="https://instagram.com/" target="_blank" class="text-[#907B71] hover:text-[#D4A373] transition-colors">
+          <i data-lucide="instagram" class="w-6 h-6" stroke-width="1.5"></i>
+        </a>
+      </div>
+    </footer>
+  </main>
+
+
+  <!-- =========================================
+       GIMMICK: STUDIO VOLLBILD-OVERLAY
+       ========================================= -->
+       
+  <div id="studio-panel" class="fixed inset-0 bg-[#F4F1F0] z-50 transform translate-y-full transition-transform duration-700 ease-in-out flex flex-col h-screen overflow-hidden">
+    
+    <!-- Header / Tab Navigation -->
+    <div class="flex flex-col md:flex-row justify-between items-center p-6 px-8 border-b border-black/10 shrink-0 bg-white shadow-sm gap-4">
+      <h2 class="text-lg tracking-widest uppercase hidden md:block">Material-Studio</h2>
+      
+      <!-- Tab Switcher -->
+      <div class="flex bg-gray-100 p-1 rounded-lg">
+        <button id="tab-flatlay" class="px-6 py-2 text-sm font-medium tracking-wide uppercase rounded-md bg-white shadow-sm transition-all text-[#2E2A28]">
+          Material-Collage
+        </button>
+        <button id="tab-stilwelten" class="px-6 py-2 text-sm font-medium tracking-wide uppercase rounded-md transition-all text-gray-500 hover:text-[#2E2A28]">
+          Stil-Welten
+        </button>
+      </div>
+
+      <button id="close-studio-btn" class="p-2 hover:bg-black/5 rounded-full transition-colors flex items-center gap-2 text-sm uppercase tracking-widest absolute md:static top-6 right-6">
+        <span class="hidden md:inline">Schließen</span>
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
     </div>
 
+    <div class="flex-grow overflow-y-auto relative">
+      
+      <!-- =========================================
+           TAB 1: FLAT LAY COLLAGE (MOODBOARD)
+           ========================================= -->
+      <div id="view-flatlay" class="absolute inset-0 grid lg:grid-cols-2 opacity-100 transition-opacity duration-500">
+        
+        <!-- Left: Konfigurator -->
+        <div class="p-8 lg:p-16 border-r border-black/10 space-y-12 flex flex-col bg-[#F4F1F0]">
+          <div>
+            <h3 class="text-3xl font-light mb-4 tracking-tight">Materialien spüren.</h3>
+            <p class="text-sm leading-relaxed opacity-80 max-w-md">
+              Kombiniere Farben und Texturen. Die Collage rechts zeigt dir sofort, wie Arbeitsplatte, Greifraumprofil und Fronten miteinander harmonieren.
+            </p>
+          </div>
+
+          <div class="space-y-8 w-full max-w-md">
+            <!-- 1. Fronten -->
+            <div>
+              <p class="text-xs uppercase tracking-widest mb-3 font-medium text-[#907B71]">1. Frontmaterial</p>
+              <div class="swatch-container h-24 rounded-lg overflow-hidden border border-black/10 shadow-sm">
+                <button class="config-btn front-btn swatch active" data-type="front" data-bg="#907B71" data-img="none" style="background-color: #907B71;">
+                  <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Sand Matt</div>
+                </button>
+                <button class="config-btn front-btn swatch" data-type="front" data-bg="#83898E" data-img="none" style="background-color: #83898E;">
+                  <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Betonoptik</div>
+                </button>
+                <button class="config-btn front-btn swatch" data-type="front" data-bg="#5C4033" data-img="none" style="background-color: #5C4033;">
+                  <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Holz Furnier</div>
+                </button>
+                <button class="config-btn front-btn swatch" data-type="front" data-bg="#F8F9FA" data-img="none" style="background-color: #F8F9FA;">
+                  <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Weiß Matt</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Arbeitsplatte -->
+            <div>
+              <p class="text-xs uppercase tracking-widest mb-3 font-medium text-[#907B71]">2. Arbeitsplatte</p>
+              <div class="swatch-container h-16 rounded-lg overflow-hidden border border-black/10 shadow-sm">
+                <button class="config-btn apl-btn swatch active" data-type="apl" data-bg="#F8F9FA" data-img="none" style="background-color: #F8F9FA;">
+                  <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Keramik Weiß</div>
+                </button>
+                <button class="config-btn apl-btn swatch" data-type="apl" data-bg="#2E2A28" data-img="none" style="background-color: #2E2A28;">
+                  <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Naturstein Schwarz</div>
+                </button>
+                <button class="config-btn apl-btn swatch" data-type="apl" data-bg="#83898E" data-img="none" style="background-color: #83898E;">
+                  <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Betonoptik</div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3. Greifraumprofil -->
+            <div>
+              <p class="text-xs uppercase tracking-widest mb-3 font-medium text-[#907B71]">3. Greifraumprofil</p>
+              <div class="swatch-container h-10 rounded-md overflow-hidden border border-black/10 shadow-sm">
+                <button class="config-btn grp-btn swatch active" data-type="grp" data-color="#1A1A1A" style="background-color: #1A1A1A;">
+                  <div class="absolute top-1/2 -translate-y-1/2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Onyxschwarz</div>
+                </button>
+                <button class="config-btn grp-btn swatch" data-type="grp" data-color="#D1D5DB" style="background-color: #D1D5DB;">
+                  <div class="absolute top-1/2 -translate-y-1/2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Edelstahl</div>
+                </button>
+                <button class="config-btn grp-btn swatch" data-type="grp" data-color="#F8F9FA" style="background-color: #F8F9FA;">
+                  <div class="absolute top-1/2 -translate-y-1/2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">Alpinweiß</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Flat Lay Visualisierung -->
+        <div class="p-8 lg:p-16 flex items-center justify-center bg-[#E8E5E3]/40 bg-[radial-gradient(#d1d5db_1px,transparent_1px)] [background-size:20px_20px]">
+          
+          <div class="relative w-full max-w-lg aspect-square drop-shadow-2xl">
+            
+            <!-- Basis: Arbeitsplatte (Hintergrund) -->
+            <div class="flatlay-apl absolute inset-0 rounded-sm shadow-inner border border-black/5">
+              <span class="absolute top-4 left-4 text-[10px] uppercase tracking-widest opacity-40 mix-blend-difference text-white">Arbeitsplatte</span>
+            </div>
+            
+            <!-- Mitte: Greifraumprofil (Trenner) -->
+            <div class="flatlay-grp absolute top-1/3 left-0 w-full h-12 shadow-inner border-y border-black/20 flex items-center">
+              <span class="ml-4 text-[10px] uppercase tracking-widest opacity-40 mix-blend-difference text-white">Profil</span>
+            </div>
+
+            <!-- Top: Front (Aufgelegt) -->
+            <div class="flatlay-front absolute bottom-0 right-0 w-[85%] h-[60%] rounded-tl-xl shadow-[-10px_-10px_30px_rgba(0,0,0,0.15)] border border-white/20">
+               <span class="absolute bottom-4 right-4 text-[10px] uppercase tracking-widest opacity-40 mix-blend-difference text-white">Front</span>
+               <!-- Lichtreflex auf der Front -->
+               <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none rounded-tl-xl"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================
+           TAB 2: STIL-WELTEN (CARAT RENDERS)
+           ========================================= -->
+      <div id="view-stilwelten" class="absolute inset-0 grid lg:grid-cols-3 opacity-0 pointer-events-none transition-opacity duration-500">
+        
+        <!-- Left: Konzept Auswahl -->
+        <div class="p-8 lg:p-16 border-r border-black/10 space-y-8 flex flex-col bg-[#F4F1F0]">
+          <div>
+            <h3 class="text-3xl font-light mb-4 tracking-tight">Konzepte erleben.</h3>
+            <p class="text-sm leading-relaxed opacity-80">
+              Wähle eine Stil-Welt aus, um fotorealistische Planungen (CARAT) in unterschiedlichen Materialkonzepten zu vergleichen.
+            </p>
+          </div>
+
+          <div class="space-y-3 flex-grow">
+            <button class="stil-btn w-full text-left p-6 rounded-xl border border-black/10 hover:border-[#D4A373] hover:bg-white transition-all group active-stil" data-target="img-scandi">
+              <h4 class="text-sm uppercase tracking-widest font-medium text-[#2E2A28] mb-1 group-hover:text-[#D4A373]">Nordic Light</h4>
+              <p class="text-xs opacity-60">Helle Töne, warmes Holz, minimalistisch.</p>
+            </button>
+            
+            <button class="stil-btn w-full text-left p-6 rounded-xl border border-black/10 hover:border-[#D4A373] hover:bg-white transition-all group" data-target="img-dark">
+              <h4 class="text-sm uppercase tracking-widest font-medium text-[#2E2A28] mb-1 group-hover:text-[#D4A373]">Dark Elegance</h4>
+              <p class="text-xs opacity-60">Nero Assoluto, dunkle Fronten, stimmungsvoll.</p>
+            </button>
+
+            <button class="stil-btn w-full text-left p-6 rounded-xl border border-black/10 hover:border-[#D4A373] hover:bg-white transition-all group" data-target="img-industrial">
+              <h4 class="text-sm uppercase tracking-widest font-medium text-[#2E2A28] mb-1 group-hover:text-[#D4A373]">Industrial Loft</h4>
+              <p class="text-xs opacity-60">Betonspachtelung, schwarzer Stahl, urban.</p>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Große Bildanzeige -->
+        <div class="lg:col-span-2 relative bg-[#E8E5E3]/40 overflow-hidden flex items-center justify-center p-8">
+          
+          <!-- HIER BILDER EINFÜGEN: Ersetze die Hintergrundfarben durch deine CARAT Renderings: style="background-image: url('images/scandi.jpg');" -->
+          
+          <div id="img-scandi" class="stil-image absolute inset-8 bg-[#F8F9FA] rounded-xl shadow-xl flex items-center justify-center border border-black/5 opacity-100 z-10 bg-cover bg-center">
+            <div class="text-center opacity-40 bg-white/80 p-4 rounded backdrop-blur">
+              <i data-lucide="image" class="w-8 h-8 mx-auto mb-2"></i>
+              <span class="text-xs uppercase tracking-widest">Rendering "Nordic Light" einfügen</span>
+            </div>
+          </div>
+
+          <div id="img-dark" class="stil-image absolute inset-8 bg-[#2E2A28] rounded-xl shadow-xl flex items-center justify-center border border-black/5 opacity-0 z-0 bg-cover bg-center">
+            <div class="text-center opacity-40 bg-black/50 text-white p-4 rounded backdrop-blur">
+              <i data-lucide="image" class="w-8 h-8 mx-auto mb-2"></i>
+              <span class="text-xs uppercase tracking-widest">Rendering "Dark Elegance" einfügen</span>
+            </div>
+          </div>
+
+          <div id="img-industrial" class="stil-image absolute inset-8 bg-[#83898E] rounded-xl shadow-xl flex items-center justify-center border border-black/5 opacity-0 z-0 bg-cover bg-center">
+            <div class="text-center opacity-40 bg-white/50 p-4 rounded backdrop-blur">
+              <i data-lucide="image" class="w-8 h-8 mx-auto mb-2"></i>
+              <span class="text-xs uppercase tracking-widest">Rendering "Industrial" einfügen</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =========================================
+       JAVASCRIPT LOGIK
+       ========================================= -->
+  <script>
+    lucide.createIcons();
+
+    // --- Studio Overlay Toggle Logik ---
+    const panel = document.getElementById('studio-panel');
+    const openBtn = document.getElementById('open-studio-btn');
+    const closeBtn = document.getElementById('close-studio-btn');
+
+    const openPanel = () => {
+      panel.classList.remove('translate-y-full');
+      document.body.style.overflow = 'hidden'; 
+    };
+
+    const closePanel = () => {
+      panel.classList.add('translate-y-full');
+      document.body.style.overflow = ''; 
+    };
+
+    openBtn.addEventListener('click', openPanel);
+    closeBtn.addEventListener('click', closePanel);
+
+    // --- Tab Navigation Logik ---
+    const tabFlatlay = document.getElementById('tab-flatlay');
+    const tabStilwelten = document.getElementById('tab-stilwelten');
+    const viewFlatlay = document.getElementById('view-flatlay');
+    const viewStilwelten = document.getElementById('view-stilwelten');
+
+    const switchTab = (activeTab, inactiveTab, activeView, inactiveView) => {
+      // Button Styles anpassen
+      activeTab.classList.remove('text-gray-500', 'hover:text-[#2E2A28]', 'bg-transparent');
+      activeTab.classList.add('bg-white', 'shadow-sm', 'text-[#2E2A28]');
+      
+      inactiveTab.classList.add('text-gray-500', 'hover:text-[#2E2A28]', 'bg-transparent');
+      inactiveTab.classList.remove('bg-white', 'shadow-sm', 'text-[#2E2A28]');
+
+      // Views umschalten
+      inactiveView.classList.remove('opacity-100');
+      inactiveView.classList.add('opacity-0', 'pointer-events-none');
+      
+      setTimeout(() => {
+        activeView.classList.remove('opacity-0', 'pointer-events-none');
+        activeView.classList.add('opacity-100');
+      }, 100); // Kurzer Delay für weichen Übergang
+    };
+
+    tabFlatlay.addEventListener('click', () => switchTab(tabFlatlay, tabStilwelten, viewFlatlay, viewStilwelten));
+    tabStilwelten.addEventListener('click', () => switchTab(tabStilwelten, tabFlatlay, viewStilwelten, viewFlatlay));
+
+    // --- Flat Lay Konfigurator Logik ---
+    const handleConfigClick = (buttonsClass, cssVarBg, cssVarImg, isColorOnly = false) => {
+      const buttons = document.querySelectorAll(buttonsClass);
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          if (isColorOnly) {
+            const color = btn.getAttribute('data-color');
+            document.documentElement.style.setProperty(cssVarBg, color);
+          } else {
+            const bg = btn.getAttribute('data-bg');
+            const img = btn.getAttribute('data-img');
+            document.documentElement.style.setProperty(cssVarBg, bg);
+            document.documentElement.style.setProperty(cssVarImg, img);
+          }
+        });
+      });
+    };
+
+    handleConfigClick('.front-btn', '--front-bg', '--front-image');
+    handleConfigClick('.apl-btn', '--apl-bg', '--apl-image');
+    handleConfigClick('.grp-btn', '--grp-color', null, true);
+
+    // --- Stil-Welten Auswahl Logik ---
+    const stilBtns = document.querySelectorAll('.stil-btn');
+    const stilImages = document.querySelectorAll('.stil-image');
+
+    stilBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Aktiven Button markieren
+        stilBtns.forEach(b => b.classList.remove('border-[#D4A373]', 'bg-white', 'shadow-sm'));
+        btn.classList.add('border-[#D4A373]', 'bg-white', 'shadow-sm');
+
+        // Alle Bilder ausblenden
+        stilImages.forEach(img => {
+          img.classList.remove('opacity-100', 'z-10');
+          img.classList.add('opacity-0', 'z-0');
+        });
+
+        // Gewähltes Bild einblenden
+        const targetId = btn.getAttribute('data-target');
+        const targetImg = document.getElementById(targetId);
+        targetImg.classList.remove('opacity-0', 'z-0');
+        targetImg.classList.add('opacity-100', 'z-10');
+      });
+    });
+
+  </script>
 </body>
 </html>
