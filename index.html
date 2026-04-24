@@ -16,6 +16,7 @@
       --korpus-color: #E8E5E3;
       --korpus-image: none;
       --grp-color: #1A1A1A;
+      --grp-image: none;
     }
 
     body {
@@ -62,6 +63,9 @@
     }
     .flatlay-grp {
       background-color: var(--grp-color);
+      background-image: var(--grp-image);
+      background-size: cover;
+      background-position: center;
       transition: background-color 0.5s ease;
     }
     .flatlay-front {
@@ -234,7 +238,8 @@
             </p>
           </div>
 
-          <div class="space-y-4 w-full max-w-md">
+          <!-- HIER WAR DIE BEGRENZUNG: max-w-md wurde zu max-w-2xl geändert -->
+          <div class="space-y-4 w-full max-w-2xl xl:max-w-3xl">
             <!-- 1. Fronten -->
             <div>
               <div class="flex justify-between items-end mb-2">
@@ -493,20 +498,18 @@
         { id: "k22", name: "Piemonteiche", bg: "#A0522D", img: "url('images/korpusholz/piemonteiche.jpg')", cat: "kat-holz" },
         { id: "k23", name: "Royal Oak", bg: "#8B6B4A", img: "url('images/korpusholz/royaloak.jpg')", cat: "kat-holz" }
       ],
-      // 4. Kehlleisten (12x)
+      // 4. Kehlleisten (Neu mit Bildern + Gold)
       kehlleisten: [
-        { id: "p1", name: "Onyxschwarz", color: "#1A1A1A" },
-        { id: "p2", name: "Edelstahl", color: "#D1D5DB" },
-        { id: "p3", name: "Alpinweiß", color: "#F8F9FA" },
-        { id: "p4", name: "Gold", color: "#D4AF37" },
-        { id: "p5", name: "Messing", color: "#B5A642" },
-        { id: "p6", name: "Kupfer", color: "#B87333" },
-        { id: "p7", name: "Bronze", color: "#CD7F32" },
-        { id: "p8", name: "Titan", color: "#878681" },
-        { id: "p9", name: "Quarzgrau", color: "#6C6960" },
-        { id: "p10", name: "Sand", color: "#D2B48C" },
-        { id: "p11", name: "Rot", color: "#8B0000" },
-        { id: "p12", name: "Blau", color: "#00008B" }
+        { id: "p1", name: "Achatweiß", bg: "#F5F5F5", img: "url('images/kehlleisten/achatweiss.jpg')" },
+        { id: "p2", name: "Art Pepper", bg: "#8D8B88", img: "url('images/kehlleisten/artpepper.jpg')" },
+        { id: "p3", name: "Fango", bg: "#7A736B", img: "url('images/kehlleisten/fango.jpg')" },
+        { id: "p4", name: "Light Nude", bg: "#E8D8C9", img: "url('images/kehlleisten/lightnude.jpg')" },
+        { id: "p5", name: "Light Pepper", bg: "#B5B2AF", img: "url('images/kehlleisten/lightpepper.jpg')" },
+        { id: "p6", name: "Macaron", bg: "#D9C9B9", img: "url('images/kehlleisten/macaron.jpg')" },
+        { id: "p7", name: "Premiumweiß", bg: "#FFFFFF", img: "url('images/kehlleisten/premiumweiss.jpg')" },
+        { id: "p8", name: "Schneeweiß", bg: "#FDFDFD", img: "url('images/kehlleisten/schneeweiss.jpg')" },
+        { id: "p9", name: "Yoko Silk", bg: "#EAE6E1", img: "url('images/kehlleisten/yokosilk.jpg')" },
+        { id: "p10", name: "Gold", bg: "#D4AF37", img: "none" }
       ],
       // 5. Stilwelten Renders
       stilwelten: [
@@ -557,10 +560,16 @@
       `).join('');
       renderKorpus(katalogData.korpusKategorien[0].id);
 
-      // 4. Kehlleisten
+      // 4. Kehlleisten (Bilder und Hintergrundfarbe aktiviert)
       document.getElementById('container-kehlleisten').innerHTML = katalogData.kehlleisten.map((item, index) => 
-        createTile(item, index, 'grp-btn', 'grp', false, false)
+        createTile(item, index, 'grp-btn', 'grp', true, true)
       ).join('');
+
+      // Initiales Bild & Farbe für Kehlleiste setzen, falls vorhanden
+      if(katalogData.kehlleisten.length > 0) {
+         document.documentElement.style.setProperty('--grp-color', katalogData.kehlleisten[0].bg);
+         document.documentElement.style.setProperty('--grp-image', katalogData.kehlleisten[0].img);
+      }
 
       // 5. Stil-Welten
       document.getElementById('container-stil-btns').innerHTML = katalogData.stilwelten.map((item, index) => `
@@ -724,7 +733,7 @@
       handleConfigClick('.front-btn', '--front-bg', '--front-image');
       handleConfigClick('.apl-btn', '--apl-bg', '--apl-image');
       handleConfigClick('.korpus-btn', '--korpus-color', '--korpus-image');
-      handleConfigClick('.grp-btn', '--grp-color', null, true);
+      handleConfigClick('.grp-btn', '--grp-color', '--grp-image');
     };
 
     const bindStilEvents = () => {
