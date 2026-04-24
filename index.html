@@ -101,7 +101,7 @@
           Hallo, ich bin Enrico Belmonte, Küchenfachberater & Ausbilder. Die Küche ist mehr als ein Arbeitsplatz - sie ist das Herzstück des Zuhauses. Mit präziser 3D-Planung und einem Auge für Details gestalte ich Räume, die Ergonomie und Ästhetik perfekt vereinen.
         </p>
         
-        <div class="flex flex-col sm:row gap-4">
+        <div class="flex flex-col sm:flex-row gap-4">
           <a href="mailto:belmonte@fs-kuechen.de" class="inline-flex items-center justify-center gap-4 border border-[#907B71] px-6 py-3 transition-all hover:bg-[#907B71] hover:text-[#F4F1F0] group">
             <span class="text-sm tracking-wide uppercase">Projekt starten</span>
             <i data-lucide="arrow-up-right" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" stroke-width="1"></i>
@@ -195,11 +195,11 @@
        
   <div id="studio-panel" class="fixed inset-0 bg-[#F4F1F0] z-50 transform translate-y-full transition-transform duration-700 ease-in-out flex flex-col h-screen overflow-hidden">
     
-    <!-- Header / Tab Navigation (Verschlankt) -->
+    <!-- Header / Tab Navigation -->
     <div class="flex flex-col md:flex-row justify-between items-center p-3 px-6 border-b border-black/10 shrink-0 bg-white shadow-sm gap-3 relative">
       <h2 class="text-sm tracking-widest uppercase hidden md:block">Material-Studio</h2>
       
-      <!-- Tab Switcher (Kompakter) -->
+      <!-- Tab Switcher -->
       <div class="flex bg-gray-100 p-1 rounded-md">
         <button id="tab-flatlay" class="px-4 py-1.5 text-xs font-medium tracking-wide uppercase rounded bg-white shadow-sm transition-all text-[#2E2A28]">
           Material-Collage
@@ -218,11 +218,11 @@
     <div class="flex-grow overflow-y-auto relative">
       
       <!-- =========================================
-           TAB 1: FLAT LAY COLLAGE (MOODBOARD)
+           TAB 1: FLAT LAY COLLAGE
            ========================================= -->
       <div id="view-flatlay" class="absolute inset-0 grid lg:grid-cols-2 opacity-100 transition-opacity duration-500">
         
-        <!-- Left: Konfigurator (Kompakteres Spacing) -->
+        <!-- Left: Konfigurator -->
         <div class="p-5 lg:p-12 border-r border-black/10 space-y-6 flex flex-col bg-[#F4F1F0] overflow-y-auto">
           <div>
             <h3 class="text-2xl font-light mb-2 tracking-tight">Materialien spüren.</h3>
@@ -232,62 +232,47 @@
           </div>
 
           <div class="space-y-4 w-full max-w-md">
-            <!-- 1. Fronten (mit Kategorien) -->
+            <!-- 1. Fronten -->
             <div>
               <div class="flex justify-between items-end mb-2">
                 <p class="text-[10px] uppercase tracking-widest font-medium text-[#907B71]">1. Frontmaterial</p>
-                <div id="container-front-kategorien" class="flex gap-1.5">
-                  <!-- Kategorien werden hier per JS generiert -->
-                </div>
+                <div id="container-front-kategorien" class="flex gap-1.5"></div>
               </div>
-              <!-- Horizontale Swipe-Leiste (mit px-4 und scroll-px-4 gegen seitliches Abschneiden) -->
-              <div id="container-fronten" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab">
-                <!-- Swatches werden per JS generiert -->
-              </div>
+              <div id="container-fronten" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab"></div>
             </div>
 
-            <!-- 2. Arbeitsplatte (mit Kategorien) -->
+            <!-- 2. Arbeitsplatte -->
             <div>
               <div class="flex justify-between items-end mb-2">
                 <p class="text-[10px] uppercase tracking-widest font-medium text-[#907B71]">2. Arbeitsplatte</p>
-                <div id="container-apl-kategorien" class="flex gap-1.5">
-                  <!-- Kategorien werden hier per JS generiert -->
-                </div>
+                <div id="container-apl-kategorien" class="flex gap-1.5"></div>
               </div>
-              <div id="container-arbeitsplatten" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab">
-                <!-- Wird per JS generiert -->
-              </div>
+              <div id="container-arbeitsplatten" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab"></div>
             </div>
 
-            <!-- 3. Korpus (mit Kategorien) -->
+            <!-- 3. Korpus -->
             <div>
               <div class="flex justify-between items-end mb-2">
                 <p class="text-[10px] uppercase tracking-widest font-medium text-[#907B71]">3. Korpus</p>
-                <div id="container-korpus-kategorien" class="flex gap-1.5">
-                  <!-- Kategorien werden hier per JS generiert -->
-                </div>
+                <div id="container-korpus-kategorien" class="flex gap-1.5"></div>
               </div>
-              <div id="container-korpus" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab">
-                <!-- Wird per JS generiert -->
-              </div>
+              <div id="container-korpus" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab"></div>
             </div>
 
             <!-- 4. Kehlleiste -->
             <div>
               <p class="text-[10px] uppercase tracking-widest mb-2 font-medium text-[#907B71]">4. Kehlleiste</p>
-              <div id="container-kehlleisten" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab">
-                <!-- Wird per JS generiert -->
-              </div>
+              <div id="container-kehlleisten" class="flex overflow-x-auto gap-3 py-4 px-4 -mx-4 snap-x scroll-px-4 hide-scrollbar cursor-grab"></div>
             </div>
           </div>
         </div>
 
-        <!-- Right: Flat Lay Visualisierung (Organische Anordnung) -->
+        <!-- Right: Flat Lay Visualisierung -->
         <div class="p-8 lg:p-16 flex items-center justify-center bg-[#E8E5E3]/40 bg-[radial-gradient(#d1d5db_1px,transparent_1px)] [background-size:20px_20px]">
           
           <div class="relative w-full max-w-lg aspect-square">
             
-            <!-- Muster 1 (Unterste Ebene): Korpus -->
+            <!-- Muster 1: Korpus -->
             <div class="flatlay-korpus absolute top-4 left-4 w-[75%] h-[75%] rounded-md shadow-lg border border-black/10 transform -rotate-3 transition-all hover:rotate-0 hover:scale-105 duration-500 z-0">
               <span class="absolute bottom-4 left-4 text-[10px] uppercase tracking-widest text-white bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded">Korpus</span>
             </div>
@@ -297,13 +282,13 @@
               <span class="absolute top-4 right-4 text-[10px] uppercase tracking-widest text-white bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded">Arbeitsplatte</span>
             </div>
             
-            <!-- Muster 3: Kehlleiste (als kompaktes Handmuster daneben) -->
+            <!-- Muster 3: Kehlleiste -->
             <div class="flatlay-grp absolute top-[20%] -left-6 w-16 h-[50%] rounded shadow-[0_15px_30px_-5px_rgba(0,0,0,0.4)] border border-white/20 transform -rotate-12 transition-all hover:-rotate-6 hover:scale-105 duration-500 z-40 cursor-default">
               <span class="absolute top-6 -right-6 text-[10px] uppercase tracking-widest text-white bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded whitespace-nowrap">Kehlleiste</span>
               <div class="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-black/30 pointer-events-none rounded"></div>
             </div>
 
-            <!-- Muster 4 (Oberste Ebene): Front -->
+            <!-- Muster 4: Front -->
             <div class="flatlay-front absolute top-[15%] left-[20%] w-[55%] h-[55%] rounded shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border border-white/20 transform rotate-2 transition-all hover:rotate-0 hover:scale-105 duration-500 z-30">
                <span class="absolute bottom-4 right-4 text-[10px] uppercase tracking-widest text-white bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded">Front</span>
                <div class="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-black/10 pointer-events-none rounded"></div>
@@ -314,7 +299,7 @@
       </div>
 
       <!-- =========================================
-           TAB 2: STIL-WELTEN (CARAT RENDERS)
+           TAB 2: STIL-WELTEN
            ========================================= -->
       <div id="view-stilwelten" class="absolute inset-0 grid lg:grid-cols-3 opacity-0 pointer-events-none transition-opacity duration-500">
         
@@ -326,14 +311,10 @@
             </p>
           </div>
 
-          <div id="container-stil-btns" class="space-y-3 flex-grow">
-            <!-- Wird per JS generiert -->
-          </div>
+          <div id="container-stil-btns" class="space-y-3 flex-grow"></div>
         </div>
 
-        <div id="container-stil-images" class="lg:col-span-2 relative bg-[#E8E5E3]/40 overflow-hidden flex items-center justify-center p-8">
-          <!-- Wird per JS generiert -->
-        </div>
+        <div id="container-stil-images" class="lg:col-span-2 relative bg-[#E8E5E3]/40 overflow-hidden flex items-center justify-center p-8"></div>
       </div>
 
     </div>
@@ -387,7 +368,7 @@
     tabStilwelten.addEventListener('click', () => switchTab(tabStilwelten, tabFlatlay, viewStilwelten, viewFlatlay));
 
     // ==========================================================
-    // KATALOG DATEN (Zentrale Pflege der Bilder & Farben)
+    // KATALOG DATEN
     // ==========================================================
     const katalogData = {
       // 1. Kategorien für Fronten
@@ -533,3 +514,239 @@
     };
 
     // Hilfsfunktion zum Rendern einer Kachel
+    const createTile = (item, index, btnClass, dataType, cssBg, cssImg) => {
+      const bgAttr = cssBg ? `data-bg="${item.bg}"` : `data-color="${item.color}"`;
+      const imgAttr = cssImg ? `data-img="${item.img}"` : '';
+      const bgColor = item.bg || item.color;
+      
+      return `
+        <button class="config-btn ${btnClass} flex-none w-16 sm:w-20 relative aspect-square rounded-md border border-black/10 overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-md snap-start ${index === 0 ? 'active' : ''}" data-type="${dataType}" ${bgAttr} ${imgAttr} style="background-color: ${bgColor}; ${item.img && item.img !== 'none' ? `background-image: ${item.img};` : ''} background-size: cover;">
+          <div class="absolute inset-x-0 bottom-0 bg-white/95 p-1 translate-y-full group-hover:translate-y-0 transition-transform duration-300 border-t border-black/5">
+            <span class="text-[8px] uppercase tracking-wider text-[#2E2A28] block truncate text-center">${item.name}</span>
+          </div>
+        </button>
+      `;
+    };
+
+    // --- RENDER LOGIK FÜR DAS STUDIO ---
+    const initKatalog = () => {
+      // 1. Front-Kategorien
+      document.getElementById('container-front-kategorien').innerHTML = katalogData.frontKategorien.map((cat, index) => `
+        <button class="cat-btn text-[10px] uppercase tracking-wider px-3 py-1 rounded border border-black/20 ${index === 0 ? 'active-cat' : 'text-gray-500 hover:border-black/50'}" data-group="front" data-target-cat="${cat.id}">
+          ${cat.name}
+        </button>
+      `).join('');
+      renderFronten(katalogData.frontKategorien[0].id);
+
+      // 2. APL-Kategorien
+      document.getElementById('container-apl-kategorien').innerHTML = katalogData.aplKategorien.map((cat, index) => `
+        <button class="cat-btn text-[10px] uppercase tracking-wider px-3 py-1 rounded border border-black/20 ${index === 0 ? 'active-cat' : 'text-gray-500 hover:border-black/50'}" data-group="apl" data-target-cat="${cat.id}">
+          ${cat.name}
+        </button>
+      `).join('');
+      renderArbeitsplatten(katalogData.aplKategorien[0].id);
+
+      // 3. Korpus-Kategorien
+      document.getElementById('container-korpus-kategorien').innerHTML = katalogData.korpusKategorien.map((cat, index) => `
+        <button class="cat-btn text-[10px] uppercase tracking-wider px-3 py-1 rounded border border-black/20 ${index === 0 ? 'active-cat' : 'text-gray-500 hover:border-black/50'}" data-group="korpus" data-target-cat="${cat.id}">
+          ${cat.name}
+        </button>
+      `).join('');
+      renderKorpus(katalogData.korpusKategorien[0].id);
+
+      // 4. Kehlleisten
+      document.getElementById('container-kehlleisten').innerHTML = katalogData.kehlleisten.map((item, index) => 
+        createTile(item, index, 'grp-btn', 'grp', false, false)
+      ).join('');
+
+      // 5. Stil-Welten
+      document.getElementById('container-stil-btns').innerHTML = katalogData.stilwelten.map((item, index) => `
+        <button class="stil-btn w-full text-left p-6 rounded-xl border border-black/10 hover:border-[#D4A373] hover:bg-white transition-all group ${index === 0 ? 'active-stil border-[#D4A373] bg-white shadow-sm' : ''}" data-target="img-${item.id}">
+          <h4 class="text-sm uppercase tracking-widest font-medium text-[#2E2A28] mb-1 group-hover:text-[#D4A373]">${item.title}</h4>
+          <p class="text-xs opacity-60">${item.desc}</p>
+        </button>
+      `).join('');
+
+      document.getElementById('container-stil-images').innerHTML = katalogData.stilwelten.map((item, index) => `
+        <div id="img-${item.id}" class="stil-image absolute inset-8 rounded-xl shadow-xl flex items-center justify-center border border-black/5 transition-opacity duration-800 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'} bg-cover bg-center" style="background-color: ${item.bg}; background-image: ${item.img};">
+          <div class="text-center p-4 rounded backdrop-blur ${item.textColor}">
+            <i data-lucide="image" class="w-8 h-8 mx-auto mb-2"></i>
+            <span class="text-xs uppercase tracking-widest">${item.label}</span>
+          </div>
+        </div>
+      `).join('');
+
+      bindCategoryEvents();
+      bindConfigEvents();
+      bindStilEvents();
+      bindDragToScroll();
+      lucide.createIcons(); // WICHTIG: Stellt sicher, dass Symbole neu generiert werden
+    };
+
+    let isDragging = false; 
+
+    const bindDragToScroll = () => {
+      const sliders = document.querySelectorAll('.hide-scrollbar');
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      sliders.forEach(slider => {
+        slider.onmousedown = null;
+        slider.onmouseleave = null;
+        slider.onmouseup = null;
+        slider.onmousemove = null;
+
+        slider.onmousedown = (e) => {
+          isDown = true;
+          isDragging = false;
+          slider.classList.remove('cursor-grab', 'snap-x'); 
+          slider.classList.add('cursor-grabbing', 'is-dragging'); 
+          startX = e.pageX - slider.offsetLeft;
+          scrollLeft = slider.scrollLeft;
+        };
+        
+        slider.onmouseleave = () => {
+          if (!isDown) return;
+          isDown = false;
+          slider.classList.remove('cursor-grabbing', 'is-dragging'); 
+          slider.classList.add('cursor-grab', 'snap-x'); 
+        };
+        
+        slider.onmouseup = () => {
+          isDown = false;
+          slider.classList.remove('cursor-grabbing', 'is-dragging'); 
+          slider.classList.add('cursor-grab', 'snap-x'); 
+          setTimeout(() => { isDragging = false; }, 50);
+        };
+        
+        slider.onmousemove = (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          isDragging = true; 
+          const x = e.pageX - slider.offsetLeft;
+          const walk = (x - startX) * 1; 
+          slider.scrollLeft = scrollLeft - walk;
+        };
+      });
+    };
+
+    const renderFronten = (catId) => {
+      const gefilterteFronten = katalogData.fronten.filter(front => front.cat === catId);
+      document.getElementById('container-fronten').innerHTML = gefilterteFronten.map((item, index) => 
+        createTile(item, index, 'front-btn', 'front', true, true)
+      ).join('');
+
+      if(gefilterteFronten.length > 0) {
+         document.documentElement.style.setProperty('--front-bg', gefilterteFronten[0].bg);
+         document.documentElement.style.setProperty('--front-image', gefilterteFronten[0].img);
+      }
+    };
+
+    const renderArbeitsplatten = (catId) => {
+      const gefilterteAPL = katalogData.arbeitsplatten.filter(apl => apl.cat === catId);
+      document.getElementById('container-arbeitsplatten').innerHTML = gefilterteAPL.map((item, index) => 
+        createTile(item, index, 'apl-btn', 'apl', true, true)
+      ).join('');
+
+      if(gefilterteAPL.length > 0) {
+         document.documentElement.style.setProperty('--apl-bg', gefilterteAPL[0].bg);
+         document.documentElement.style.setProperty('--apl-image', gefilterteAPL[0].img);
+      }
+    };
+
+    const renderKorpus = (catId) => {
+      const gefilterteKorpus = katalogData.korpus.filter(k => k.cat === catId);
+      document.getElementById('container-korpus').innerHTML = gefilterteKorpus.map((item, index) => 
+        createTile(item, index, 'korpus-btn', 'korpus', true, true)
+      ).join('');
+
+      if(gefilterteKorpus.length > 0) {
+         document.documentElement.style.setProperty('--korpus-color', gefilterteKorpus[0].bg);
+         document.documentElement.style.setProperty('--korpus-image', gefilterteKorpus[0].img);
+      }
+    };
+
+    const bindCategoryEvents = () => {
+      const catBtns = document.querySelectorAll('.cat-btn');
+      catBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const group = btn.getAttribute('data-group');
+          const targetCat = btn.getAttribute('data-target-cat');
+
+          const groupBtns = document.querySelectorAll(`.cat-btn[data-group="${group}"]`);
+          groupBtns.forEach(b => {
+             b.classList.remove('active-cat');
+             b.classList.add('text-gray-500', 'hover:border-black/50');
+          });
+          btn.classList.add('active-cat');
+          btn.classList.remove('text-gray-500', 'hover:border-black/50');
+
+          if (group === 'front') {
+            renderFronten(targetCat);
+            handleConfigClick('.front-btn', '--front-bg', '--front-image');
+          } else if (group === 'apl') {
+            renderArbeitsplatten(targetCat);
+            handleConfigClick('.apl-btn', '--apl-bg', '--apl-image');
+          } else if (group === 'korpus') {
+            renderKorpus(targetCat);
+            handleConfigClick('.korpus-btn', '--korpus-color', '--korpus-image');
+          }
+        });
+      });
+    };
+
+    const handleConfigClick = (buttonsClass, cssVarBg, cssVarImg, isColorOnly = false) => {
+      const buttons = document.querySelectorAll(buttonsClass);
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (isDragging) return;
+
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          if (isColorOnly) {
+            document.documentElement.style.setProperty(cssVarBg, btn.getAttribute('data-color'));
+          } else {
+            document.documentElement.style.setProperty(cssVarBg, btn.getAttribute('data-bg'));
+            document.documentElement.style.setProperty(cssVarImg, btn.getAttribute('data-img'));
+          }
+        });
+      });
+    };
+
+    const bindConfigEvents = () => {
+      handleConfigClick('.front-btn', '--front-bg', '--front-image');
+      handleConfigClick('.apl-btn', '--apl-bg', '--apl-image');
+      handleConfigClick('.korpus-btn', '--korpus-color', '--korpus-image');
+      handleConfigClick('.grp-btn', '--grp-color', null, true);
+    };
+
+    const bindStilEvents = () => {
+      const stilBtns = document.querySelectorAll('.stil-btn');
+      const stilImages = document.querySelectorAll('.stil-image');
+
+      stilBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          stilBtns.forEach(b => b.classList.remove('border-[#D4A373]', 'bg-white', 'shadow-sm'));
+          btn.classList.add('border-[#D4A373]', 'bg-white', 'shadow-sm');
+
+          stilImages.forEach(img => {
+            img.classList.remove('opacity-100', 'z-10');
+            img.classList.add('opacity-0', 'z-0');
+          });
+
+          const targetId = btn.getAttribute('data-target');
+          const targetImg = document.getElementById(targetId);
+          targetImg.classList.remove('opacity-0', 'z-0');
+          targetImg.classList.add('opacity-100', 'z-10');
+        });
+      });
+    };
+
+    // Applikation starten
+    initKatalog();
+
+  </script>
+</body>
+</html>
