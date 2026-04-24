@@ -50,12 +50,14 @@
       background-color: var(--korpus-color);
       background-image: var(--korpus-image);
       background-size: cover;
+      background-position: center;
       transition: background-color 0.5s ease;
     }
     .flatlay-apl {
       background-color: var(--apl-bg);
       background-image: var(--apl-image);
       background-size: cover;
+      background-position: center;
       transition: background-color 0.5s ease;
     }
     .flatlay-grp {
@@ -66,6 +68,7 @@
       background-color: var(--front-bg);
       background-image: var(--front-image);
       background-size: cover;
+      background-position: center;
       transition: background-color 0.5s ease;
     }
 
@@ -520,7 +523,7 @@
       const bgColor = item.bg || item.color;
       
       return `
-        <button class="config-btn ${btnClass} flex-none w-16 sm:w-20 relative aspect-square rounded-md border border-black/10 overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-md snap-start ${index === 0 ? 'active' : ''}" data-type="${dataType}" ${bgAttr} ${imgAttr} style="background-color: ${bgColor}; ${item.img && item.img !== 'none' ? `background-image: ${item.img};` : ''} background-size: cover;">
+        <button class="config-btn ${btnClass} flex-none w-16 sm:w-20 relative aspect-square rounded-md border border-black/10 overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-md snap-start ${index === 0 ? 'active' : ''}" data-type="${dataType}" ${bgAttr} ${imgAttr} style="background-color: ${bgColor}; ${item.img && item.img !== 'none' ? `background-image: ${item.img};` : ''} background-size: cover; background-position: center;">
           <div class="absolute inset-x-0 bottom-0 bg-white/95 p-1 translate-y-full group-hover:translate-y-0 transition-transform duration-300 border-t border-black/5">
             <span class="text-[8px] uppercase tracking-wider text-[#2E2A28] block truncate text-center">${item.name}</span>
           </div>
@@ -601,7 +604,7 @@
           isDown = true;
           isDragging = false;
           slider.classList.remove('cursor-grab', 'snap-x'); 
-          slider.classList.add('cursor-grabbing', 'is-dragging'); 
+          slider.classList.add('cursor-grabbing'); // is-dragging hier noch weglassen!
           startX = e.pageX - slider.offsetLeft;
           scrollLeft = slider.scrollLeft;
         };
@@ -622,10 +625,12 @@
         
         slider.onmousemove = (e) => {
           if (!isDown) return;
-          e.preventDefault();
-          isDragging = true; 
           const x = e.pageX - slider.offsetLeft;
           const walk = (x - startX) * 1; 
+          if (Math.abs(walk) < 5) return; // 5 Pixel Toleranz: Klicks werden geschützt!
+          e.preventDefault();
+          isDragging = true; 
+          slider.classList.add('is-dragging'); // Erst beim wirklichen Ziehen aktivieren
           slider.scrollLeft = scrollLeft - walk;
         };
       });
