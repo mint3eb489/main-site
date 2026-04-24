@@ -30,6 +30,10 @@
     /* --- Scrollbar ausblenden für Swipe-Leisten --- */
     .hide-scrollbar::-webkit-scrollbar { display: none; }
     .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* --- Drag to Scroll Cursor --- */
+    .cursor-grab { cursor: grab; }
+    .cursor-grabbing { cursor: grabbing; }
 
     /* --- Kachel-Raster Styling --- */
     .config-btn.active { 
@@ -188,23 +192,23 @@
        
   <div id="studio-panel" class="fixed inset-0 bg-[#F4F1F0] z-50 transform translate-y-full transition-transform duration-700 ease-in-out flex flex-col h-screen overflow-hidden">
     
-    <!-- Header / Tab Navigation -->
-    <div class="flex flex-col md:flex-row justify-between items-center p-6 px-8 border-b border-black/10 shrink-0 bg-white shadow-sm gap-4">
-      <h2 class="text-lg tracking-widest uppercase hidden md:block">Material-Studio</h2>
+    <!-- Header / Tab Navigation (Verschlankt) -->
+    <div class="flex flex-col md:flex-row justify-between items-center p-3 px-6 border-b border-black/10 shrink-0 bg-white shadow-sm gap-3 relative">
+      <h2 class="text-sm tracking-widest uppercase hidden md:block">Material-Studio</h2>
       
-      <!-- Tab Switcher -->
-      <div class="flex bg-gray-100 p-1 rounded-lg">
-        <button id="tab-flatlay" class="px-6 py-2 text-sm font-medium tracking-wide uppercase rounded-md bg-white shadow-sm transition-all text-[#2E2A28]">
+      <!-- Tab Switcher (Kompakter) -->
+      <div class="flex bg-gray-100 p-1 rounded-md">
+        <button id="tab-flatlay" class="px-4 py-1.5 text-xs font-medium tracking-wide uppercase rounded bg-white shadow-sm transition-all text-[#2E2A28]">
           Material-Collage
         </button>
-        <button id="tab-stilwelten" class="px-6 py-2 text-sm font-medium tracking-wide uppercase rounded-md transition-all text-gray-500 hover:text-[#2E2A28]">
+        <button id="tab-stilwelten" class="px-4 py-1.5 text-xs font-medium tracking-wide uppercase rounded transition-all text-gray-500 hover:text-[#2E2A28]">
           Stil-Welten
         </button>
       </div>
 
-      <button id="close-studio-btn" class="p-2 hover:bg-black/5 rounded-full transition-colors flex items-center gap-2 text-sm uppercase tracking-widest absolute md:static top-6 right-6">
+      <button id="close-studio-btn" class="p-2 hover:bg-black/5 rounded-full transition-colors flex items-center gap-2 text-xs uppercase tracking-widest absolute md:static top-4 right-4 md:top-auto md:right-auto">
         <span class="hidden md:inline">Schließen</span>
-        <i data-lucide="x" class="w-6 h-6"></i>
+        <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
 
@@ -215,55 +219,55 @@
            ========================================= -->
       <div id="view-flatlay" class="absolute inset-0 grid lg:grid-cols-2 opacity-100 transition-opacity duration-500">
         
-        <!-- Left: Konfigurator -->
-        <div class="p-8 lg:p-16 border-r border-black/10 space-y-10 flex flex-col bg-[#F4F1F0] overflow-y-auto">
+        <!-- Left: Konfigurator (Kompakteres Spacing) -->
+        <div class="p-5 lg:p-12 border-r border-black/10 space-y-6 flex flex-col bg-[#F4F1F0] overflow-y-auto">
           <div>
-            <h3 class="text-3xl font-light mb-4 tracking-tight">Materialien spüren.</h3>
-            <p class="text-sm leading-relaxed opacity-80 max-w-md">
+            <h3 class="text-2xl font-light mb-2 tracking-tight">Materialien spüren.</h3>
+            <p class="text-xs leading-relaxed opacity-80 max-w-md hidden sm:block">
               Kombiniere Farben und Texturen. Die Collage rechts zeigt dir sofort, wie Arbeitsplatte, Korpus, Kehlleiste und Fronten miteinander harmonieren.
             </p>
           </div>
 
-          <div class="space-y-8 w-full max-w-md">
+          <div class="space-y-4 w-full max-w-md">
             <!-- 1. Fronten (mit Kategorien) -->
             <div>
-              <div class="flex justify-between items-end mb-3">
-                <p class="text-xs uppercase tracking-widest font-medium text-[#907B71]">1. Frontmaterial</p>
-                <div id="container-front-kategorien" class="flex gap-2">
+              <div class="flex justify-between items-end mb-2">
+                <p class="text-[10px] uppercase tracking-widest font-medium text-[#907B71]">1. Frontmaterial</p>
+                <div id="container-front-kategorien" class="flex gap-1.5">
                   <!-- Kategorien werden hier per JS generiert -->
                 </div>
               </div>
-              <!-- Horizontale Swipe-Leiste -->
-              <div id="container-fronten" class="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar">
+              <!-- Horizontale Swipe-Leiste (mit py-2 gegen Abschneiden) -->
+              <div id="container-fronten" class="flex overflow-x-auto gap-3 py-2 px-1 -mx-1 snap-x hide-scrollbar cursor-grab">
                 <!-- Swatches werden per JS generiert -->
               </div>
             </div>
 
             <!-- 2. Arbeitsplatte (mit Kategorien) -->
             <div>
-              <div class="flex justify-between items-end mb-3">
-                <p class="text-xs uppercase tracking-widest font-medium text-[#907B71]">2. Arbeitsplatte</p>
-                <div id="container-apl-kategorien" class="flex gap-2">
+              <div class="flex justify-between items-end mb-2">
+                <p class="text-[10px] uppercase tracking-widest font-medium text-[#907B71]">2. Arbeitsplatte</p>
+                <div id="container-apl-kategorien" class="flex gap-1.5">
                   <!-- Kategorien werden hier per JS generiert -->
                 </div>
               </div>
-              <div id="container-arbeitsplatten" class="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar">
+              <div id="container-arbeitsplatten" class="flex overflow-x-auto gap-3 py-2 px-1 -mx-1 snap-x hide-scrollbar cursor-grab">
                 <!-- Wird per JS generiert -->
               </div>
             </div>
 
             <!-- 3. Korpus -->
             <div>
-              <p class="text-xs uppercase tracking-widest mb-3 font-medium text-[#907B71]">3. Korpus</p>
-              <div id="container-korpus" class="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar">
+              <p class="text-[10px] uppercase tracking-widest mb-2 font-medium text-[#907B71]">3. Korpus</p>
+              <div id="container-korpus" class="flex overflow-x-auto gap-3 py-2 px-1 -mx-1 snap-x hide-scrollbar cursor-grab">
                 <!-- Wird per JS generiert -->
               </div>
             </div>
 
             <!-- 4. Kehlleiste -->
             <div>
-              <p class="text-xs uppercase tracking-widest mb-3 font-medium text-[#907B71]">4. Kehlleiste</p>
-              <div id="container-kehlleisten" class="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar">
+              <p class="text-[10px] uppercase tracking-widest mb-2 font-medium text-[#907B71]">4. Kehlleiste</p>
+              <div id="container-kehlleisten" class="flex overflow-x-auto gap-3 py-2 px-1 -mx-1 snap-x hide-scrollbar cursor-grab">
                 <!-- Wird per JS generiert -->
               </div>
             </div>
@@ -470,9 +474,9 @@
       const bgColor = item.bg || item.color;
       
       return `
-        <button class="config-btn ${btnClass} flex-none w-20 sm:w-24 relative aspect-square rounded-lg border border-black/10 overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-md snap-start ${index === 0 ? 'active' : ''}" data-type="${dataType}" ${bgAttr} ${imgAttr} style="background-color: ${bgColor}; ${item.img && item.img !== 'none' ? `background-image: ${item.img};` : ''} background-size: cover;">
-          <div class="absolute inset-x-0 bottom-0 bg-white/95 p-1.5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 border-t border-black/5">
-            <span class="text-[9px] uppercase tracking-wider text-[#2E2A28] block truncate text-center">${item.name}</span>
+        <button class="config-btn ${btnClass} flex-none w-16 sm:w-20 relative aspect-square rounded-md border border-black/10 overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-md snap-start ${index === 0 ? 'active' : ''}" data-type="${dataType}" ${bgAttr} ${imgAttr} style="background-color: ${bgColor}; ${item.img && item.img !== 'none' ? `background-image: ${item.img};` : ''} background-size: cover;">
+          <div class="absolute inset-x-0 bottom-0 bg-white/95 p-1 translate-y-full group-hover:translate-y-0 transition-transform duration-300 border-t border-black/5">
+            <span class="text-[8px] uppercase tracking-wider text-[#2E2A28] block truncate text-center">${item.name}</span>
           </div>
         </button>
       `;
@@ -533,7 +537,52 @@
       bindCategoryEvents();
       bindConfigEvents();
       bindStilEvents();
+      bindDragToScroll(); // Drag-Funktion initialisieren
       lucide.createIcons();
+    };
+
+    // --- Drag to Scroll Logik (Desktop) ---
+    let isDragging = false; // Globale Variable, um Klicks beim Ziehen zu verhindern
+
+    const bindDragToScroll = () => {
+      const sliders = document.querySelectorAll('.hide-scrollbar');
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      sliders.forEach(slider => {
+        slider.addEventListener('mousedown', (e) => {
+          isDown = true;
+          isDragging = false;
+          slider.classList.remove('cursor-grab');
+          slider.classList.add('cursor-grabbing');
+          startX = e.pageX - slider.offsetLeft;
+          scrollLeft = slider.scrollLeft;
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+          isDown = false;
+          slider.classList.remove('cursor-grabbing');
+          slider.classList.add('cursor-grab');
+        });
+        
+        slider.addEventListener('mouseup', () => {
+          isDown = false;
+          slider.classList.remove('cursor-grabbing');
+          slider.classList.add('cursor-grab');
+          // Setze isDragging nach einer kurzen Verzögerung zurück, damit der Klick nicht feuert
+          setTimeout(() => { isDragging = false; }, 50);
+        });
+        
+        slider.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          isDragging = true; // Wir ziehen gerade, Klicks blockieren!
+          const x = e.pageX - slider.offsetLeft;
+          const walk = (x - startX) * 2; // Scroll-Geschwindigkeit
+          slider.scrollLeft = scrollLeft - walk;
+        });
+      });
     };
 
     // --- Sub-Render-Funktionen ---
@@ -580,9 +629,11 @@
           if (group === 'front') {
             renderFronten(targetCat);
             handleConfigClick('.front-btn', '--front-bg', '--front-image');
+            bindDragToScroll(); // Nach dem Neu-Rendern Events wieder anheften
           } else if (group === 'apl') {
             renderArbeitsplatten(targetCat);
             handleConfigClick('.apl-btn', '--apl-bg', '--apl-image');
+            bindDragToScroll(); // Nach dem Neu-Rendern Events wieder anheften
           }
         });
       });
@@ -592,6 +643,9 @@
       const buttons = document.querySelectorAll(buttonsClass);
       buttons.forEach(btn => {
         btn.addEventListener('click', () => {
+          // WICHTIG: Wenn auf dem PC gerade horizontal gescrollt wurde, den Klick ignorieren!
+          if (isDragging) return;
+
           buttons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
 
