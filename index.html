@@ -23,17 +23,20 @@
       color: #2E2A28;
     }
 
-    /* --- Swatch Accordion (Materialfächer) --- */
-    .swatch-container { display: flex; width: 100%; gap: 2px; }
-    .swatch { flex: 1; transition: flex 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease; cursor: pointer; position: relative; }
-    .swatch:hover { flex: 4; }
-    .config-btn.active { box-shadow: inset 0 0 0 2px rgba(255,255,255,0.4), inset 0 0 0 4px #2E2A28; z-index: 10; }
-    .swatch-label { opacity: 0; transition: opacity 0.3s ease; pointer-events: none; }
-    .swatch:hover .swatch-label { opacity: 1; transition-delay: 0.15s; }
-
     /* --- Kategorie Buttons --- */
     .cat-btn { transition: all 0.2s ease; }
     .cat-btn.active-cat { background-color: #2E2A28; color: #F4F1F0; border-color: #2E2A28; }
+
+    /* --- Scrollbar ausblenden für Swipe-Leisten --- */
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* --- Kachel-Raster Styling --- */
+    .config-btn.active { 
+      box-shadow: 0 0 0 2px #F4F1F0, 0 0 0 4px #2E2A28; 
+      z-index: 10; 
+      transform: scale(1.05);
+    }
 
     /* --- Flat Lay Collage Styles --- */
     .flatlay-korpus {
@@ -213,7 +216,7 @@
       <div id="view-flatlay" class="absolute inset-0 grid lg:grid-cols-2 opacity-100 transition-opacity duration-500">
         
         <!-- Left: Konfigurator -->
-        <div class="p-8 lg:p-16 border-r border-black/10 space-y-10 flex flex-col bg-[#F4F1F0]">
+        <div class="p-8 lg:p-16 border-r border-black/10 space-y-10 flex flex-col bg-[#F4F1F0] overflow-y-auto">
           <div>
             <h3 class="text-3xl font-light mb-4 tracking-tight">Materialien spüren.</h3>
             <p class="text-sm leading-relaxed opacity-80 max-w-md">
@@ -230,7 +233,8 @@
                   <!-- Kategorien werden hier per JS generiert -->
                 </div>
               </div>
-              <div id="container-fronten" class="swatch-container h-24 rounded-lg overflow-hidden border border-black/10 shadow-sm">
+              <!-- Horizontale Swipe-Leiste -->
+              <div id="container-fronten" class="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar">
                 <!-- Swatches werden per JS generiert -->
               </div>
             </div>
@@ -243,7 +247,7 @@
                   <!-- Kategorien werden hier per JS generiert -->
                 </div>
               </div>
-              <div id="container-arbeitsplatten" class="swatch-container h-16 rounded-lg overflow-hidden border border-black/10 shadow-sm">
+              <div id="container-arbeitsplatten" class="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar">
                 <!-- Wird per JS generiert -->
               </div>
             </div>
@@ -251,7 +255,7 @@
             <!-- 3. Korpus -->
             <div>
               <p class="text-xs uppercase tracking-widest mb-3 font-medium text-[#907B71]">3. Korpus</p>
-              <div id="container-korpus" class="swatch-container h-16 rounded-lg overflow-hidden border border-black/10 shadow-sm">
+              <div id="container-korpus" class="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar">
                 <!-- Wird per JS generiert -->
               </div>
             </div>
@@ -259,7 +263,7 @@
             <!-- 4. Kehlleiste -->
             <div>
               <p class="text-xs uppercase tracking-widest mb-3 font-medium text-[#907B71]">4. Kehlleiste</p>
-              <div id="container-kehlleisten" class="swatch-container h-10 rounded-md overflow-hidden border border-black/10 shadow-sm">
+              <div id="container-kehlleisten" class="flex overflow-x-auto gap-3 pb-4 snap-x hide-scrollbar">
                 <!-- Wird per JS generiert -->
               </div>
             </div>
@@ -284,14 +288,12 @@
             <!-- Muster 3: Kehlleiste (als kompaktes Handmuster daneben) -->
             <div class="flatlay-grp absolute top-[20%] -left-6 w-16 h-[50%] rounded shadow-[0_15px_30px_-5px_rgba(0,0,0,0.4)] border border-white/20 transform -rotate-12 transition-all hover:-rotate-6 hover:scale-105 duration-500 z-40 cursor-default">
               <span class="absolute top-6 -right-6 text-[10px] uppercase tracking-widest text-white bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded whitespace-nowrap">Kehlleiste</span>
-              <!-- Simulierter Profil-Querschnitt (Lichtkante) -->
               <div class="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-black/30 pointer-events-none rounded"></div>
             </div>
 
             <!-- Muster 4 (Oberste Ebene): Front -->
             <div class="flatlay-front absolute top-[15%] left-[20%] w-[55%] h-[55%] rounded shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border border-white/20 transform rotate-2 transition-all hover:rotate-0 hover:scale-105 duration-500 z-30">
                <span class="absolute bottom-4 right-4 text-[10px] uppercase tracking-widest text-white bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded">Front</span>
-               <!-- Lichtreflex für mehr Tiefe -->
                <div class="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-black/10 pointer-events-none rounded"></div>
             </div>
 
@@ -382,11 +384,22 @@
         { id: "kat-furnier", name: "Furnier" }
       ],
       fronten: [
+        // 12x Mattlack Muster
         { id: "f1", name: "Sand Matt", bg: "#907B71", img: "none", cat: "kat-matt" },
         { id: "f2", name: "Weiß Matt", bg: "#F8F9FA", img: "none", cat: "kat-matt" },
         { id: "f3", name: "Onyx Matt", bg: "#2E2A28", img: "none", cat: "kat-matt" },
-        { id: "f4", name: "Nussbaum", bg: "#5C4033", img: "none", cat: "kat-furnier" },
-        { id: "f5", name: "Eiche Hell", bg: "#D4A373", img: "none", cat: "kat-furnier" }
+        { id: "f4", name: "Lichtgrau", bg: "#D1D5DB", img: "none", cat: "kat-matt" },
+        { id: "f5", name: "Salbei", bg: "#8A9A86", img: "none", cat: "kat-matt" },
+        { id: "f6", name: "Nachtblau", bg: "#1C2A39", img: "none", cat: "kat-matt" },
+        { id: "f7", name: "Terracotta", bg: "#C17753", img: "none", cat: "kat-matt" },
+        { id: "f8", name: "Schilf", bg: "#AAB39B", img: "none", cat: "kat-matt" },
+        { id: "f9", name: "Fjordblau", bg: "#4A6274", img: "none", cat: "kat-matt" },
+        { id: "f10", name: "Steingrau", bg: "#7A7B76", img: "none", cat: "kat-matt" },
+        { id: "f11", name: "Muschel", bg: "#E5E1D8", img: "none", cat: "kat-matt" },
+        { id: "f12", name: "Schwarz", bg: "#111111", img: "none", cat: "kat-matt" },
+        // Zweite Kategorie
+        { id: "f13", name: "Nussbaum", bg: "#5C4033", img: "none", cat: "kat-furnier" },
+        { id: "f14", name: "Eiche Hell", bg: "#D4A373", img: "none", cat: "kat-furnier" }
       ],
       // 2. Kategorien für Arbeitsplatten
       aplKategorien: [
@@ -394,23 +407,53 @@
         { id: "kat-stein", name: "Naturstein" }
       ],
       arbeitsplatten: [
+        // 12x Schichtstoff Muster
         { id: "a1", name: "Keramik Weiß", bg: "#F8F9FA", img: "none", cat: "kat-schichtstoff" },
         { id: "a2", name: "Betonoptik", bg: "#83898E", img: "none", cat: "kat-schichtstoff" },
+        { id: "a3", name: "Eiche Natur", bg: "#C69C6D", img: "none", cat: "kat-schichtstoff" },
+        { id: "a4", name: "Rost", bg: "#8B4513", img: "none", cat: "kat-schichtstoff" },
+        { id: "a5", name: "Schiefer", bg: "#2F4F4F", img: "none", cat: "kat-schichtstoff" },
+        { id: "a6", name: "Stahlgrau", bg: "#A9A9A9", img: "none", cat: "kat-schichtstoff" },
+        { id: "a7", name: "Marmor Hell", bg: "#F0EBE1", img: "none", cat: "kat-schichtstoff" },
+        { id: "a8", name: "Marmor Dunkel", bg: "#222222", img: "none", cat: "kat-schichtstoff" },
+        { id: "a9", name: "Kupfer", bg: "#B87333", img: "none", cat: "kat-schichtstoff" },
+        { id: "a10", name: "Beton Dunkel", bg: "#5C6063", img: "none", cat: "kat-schichtstoff" },
+        { id: "a11", name: "Eiche Rauch", bg: "#8B6B4A", img: "none", cat: "kat-schichtstoff" },
+        { id: "a12", name: "Gletscher", bg: "#EAF2F8", img: "none", cat: "kat-schichtstoff" },
+        // Naturstein
         { id: "n1", name: "Nero Assoluto", bg: "#2E2A28", img: "none", cat: "kat-stein" },
         { id: "n2", name: "Bianco Carrara", bg: "#EAE6E1", img: "none", cat: "kat-stein" },
         { id: "n3", name: "Taj Mahal", bg: "#D3CDBF", img: "none", cat: "kat-stein" }
       ],
-      // 3. Korpus Dekore
+      // 3. Korpus Dekore (12x)
       korpus: [
         { id: "k1", name: "Kristallweiß", bg: "#F8F9FA", img: "none" },
         { id: "k2", name: "Lichtgrau", bg: "#D1D5DB", img: "none" },
-        { id: "k3", name: "Lavagrau", bg: "#5A5A5A", img: "none" }
+        { id: "k3", name: "Lavagrau", bg: "#5A5A5A", img: "none" },
+        { id: "k4", name: "Sahara", bg: "#E1D5C9", img: "none" },
+        { id: "k5", name: "Steingrau", bg: "#8B8C89", img: "none" },
+        { id: "k6", name: "Schwarz", bg: "#1C1C1C", img: "none" },
+        { id: "k7", name: "Eiche Hell", bg: "#D4B895", img: "none" },
+        { id: "k8", name: "Nussbaum", bg: "#6E4C33", img: "none" },
+        { id: "k9", name: "Kaschmir", bg: "#C6BCAE", img: "none" },
+        { id: "k10", name: "Taupe", bg: "#8D8075", img: "none" },
+        { id: "k11", name: "Ozeanblau", bg: "#364F6B", img: "none" },
+        { id: "k12", name: "Moosgrün", bg: "#4A5D23", img: "none" }
       ],
-      // 4. Kehlleisten
+      // 4. Kehlleisten (12x)
       kehlleisten: [
         { id: "p1", name: "Onyxschwarz", color: "#1A1A1A" },
         { id: "p2", name: "Edelstahl", color: "#D1D5DB" },
-        { id: "p3", name: "Alpinweiß", color: "#F8F9FA" }
+        { id: "p3", name: "Alpinweiß", color: "#F8F9FA" },
+        { id: "p4", name: "Gold", color: "#D4AF37" },
+        { id: "p5", name: "Messing", color: "#B5A642" },
+        { id: "p6", name: "Kupfer", color: "#B87333" },
+        { id: "p7", name: "Bronze", color: "#CD7F32" },
+        { id: "p8", name: "Titan", color: "#878681" },
+        { id: "p9", name: "Quarzgrau", color: "#6C6960" },
+        { id: "p10", name: "Sand", color: "#D2B48C" },
+        { id: "p11", name: "Rot", color: "#8B0000" },
+        { id: "p12", name: "Blau", color: "#00008B" }
       ],
       // 5. Stilwelten Renders
       stilwelten: [
@@ -418,6 +461,21 @@
         { id: "dark", title: "Dark Elegance", desc: "Nero Assoluto, dunkle Fronten, stimmungsvoll.", bg: "#2E2A28", img: "none", textColor: "opacity-40 bg-black/50 text-white", label: "Rendering 'Dark Elegance' einfügen" },
         { id: "industrial", title: "Industrial Loft", desc: "Betonspachtelung, schwarzer Stahl, urban.", bg: "#83898E", img: "none", textColor: "opacity-40 bg-white/50", label: "Rendering 'Industrial' einfügen" }
       ]
+    };
+
+    // Hilfsfunktion zum Rendern einer Kachel
+    const createTile = (item, index, btnClass, dataType, cssBg, cssImg) => {
+      const bgAttr = cssBg ? `data-bg="${item.bg}"` : `data-color="${item.color}"`;
+      const imgAttr = cssImg ? `data-img="${item.img}"` : '';
+      const bgColor = item.bg || item.color;
+      
+      return `
+        <button class="config-btn ${btnClass} flex-none w-20 sm:w-24 relative aspect-square rounded-lg border border-black/10 overflow-hidden group transition-all duration-300 hover:-translate-y-1 hover:shadow-md snap-start ${index === 0 ? 'active' : ''}" data-type="${dataType}" ${bgAttr} ${imgAttr} style="background-color: ${bgColor}; ${item.img && item.img !== 'none' ? `background-image: ${item.img};` : ''} background-size: cover;">
+          <div class="absolute inset-x-0 bottom-0 bg-white/95 p-1.5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 border-t border-black/5">
+            <span class="text-[9px] uppercase tracking-wider text-[#2E2A28] block truncate text-center">${item.name}</span>
+          </div>
+        </button>
+      `;
     };
 
     // --- RENDER LOGIK FÜR DAS STUDIO ---
@@ -429,7 +487,6 @@
         </button>
       `).join('');
 
-      // Initiale Fronten laden
       renderFronten(katalogData.frontKategorien[0].id);
 
       // 2. APL-Kategorien generieren
@@ -439,28 +496,22 @@
         </button>
       `).join('');
 
-      // Initiale Arbeitsplatten laden
       renderArbeitsplatten(katalogData.aplKategorien[0].id);
 
       // 3. Korpus generieren
-      document.getElementById('container-korpus').innerHTML = katalogData.korpus.map((item, index) => `
-        <button class="config-btn korpus-btn swatch ${index === 0 ? 'active' : ''}" data-type="korpus" data-bg="${item.bg}" data-img="${item.img}" style="background-color: ${item.bg}; background-image: ${item.img}; background-size: cover;">
-          <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">${item.name}</div>
-        </button>
-      `).join('');
+      document.getElementById('container-korpus').innerHTML = katalogData.korpus.map((item, index) => 
+        createTile(item, index, 'korpus-btn', 'korpus', true, true)
+      ).join('');
 
-      // Initiale Korpusfarbe setzen
       if(katalogData.korpus.length > 0) {
          document.documentElement.style.setProperty('--korpus-color', katalogData.korpus[0].bg);
          document.documentElement.style.setProperty('--korpus-image', katalogData.korpus[0].img);
       }
 
       // 4. Kehlleisten generieren
-      document.getElementById('container-kehlleisten').innerHTML = katalogData.kehlleisten.map((item, index) => `
-        <button class="config-btn grp-btn swatch ${index === 0 ? 'active' : ''}" data-type="grp" data-color="${item.color}" style="background-color: ${item.color};">
-          <div class="absolute top-1/2 -translate-y-1/2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">${item.name}</div>
-        </button>
-      `).join('');
+      document.getElementById('container-kehlleisten').innerHTML = katalogData.kehlleisten.map((item, index) => 
+        createTile(item, index, 'grp-btn', 'grp', false, false)
+      ).join('');
 
       // 5. Stil-Welten generieren
       document.getElementById('container-stil-btns').innerHTML = katalogData.stilwelten.map((item, index) => `
@@ -488,11 +539,9 @@
     // --- Sub-Render-Funktionen ---
     const renderFronten = (catId) => {
       const gefilterteFronten = katalogData.fronten.filter(front => front.cat === catId);
-      document.getElementById('container-fronten').innerHTML = gefilterteFronten.map((item, index) => `
-        <button class="config-btn front-btn swatch ${index === 0 ? 'active' : ''}" data-type="front" data-bg="${item.bg}" data-img="${item.img}" style="background-color: ${item.bg}; background-image: ${item.img}; background-size: cover;">
-          <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">${item.name}</div>
-        </button>
-      `).join('');
+      document.getElementById('container-fronten').innerHTML = gefilterteFronten.map((item, index) => 
+        createTile(item, index, 'front-btn', 'front', true, true)
+      ).join('');
 
       if(gefilterteFronten.length > 0) {
          document.documentElement.style.setProperty('--front-bg', gefilterteFronten[0].bg);
@@ -502,11 +551,9 @@
 
     const renderArbeitsplatten = (catId) => {
       const gefilterteAPL = katalogData.arbeitsplatten.filter(apl => apl.cat === catId);
-      document.getElementById('container-arbeitsplatten').innerHTML = gefilterteAPL.map((item, index) => `
-        <button class="config-btn apl-btn swatch ${index === 0 ? 'active' : ''}" data-type="apl" data-bg="${item.bg}" data-img="${item.img}" style="background-color: ${item.bg}; background-image: ${item.img}; background-size: cover;">
-          <div class="absolute bottom-2 left-2 swatch-label bg-white/95 border border-black/10 text-[#2E2A28] text-[10px] uppercase tracking-wider px-2 py-1 rounded shadow-sm whitespace-nowrap">${item.name}</div>
-        </button>
-      `).join('');
+      document.getElementById('container-arbeitsplatten').innerHTML = gefilterteAPL.map((item, index) => 
+        createTile(item, index, 'apl-btn', 'apl', true, true)
+      ).join('');
 
       if(gefilterteAPL.length > 0) {
          document.documentElement.style.setProperty('--apl-bg', gefilterteAPL[0].bg);
@@ -522,7 +569,6 @@
           const group = btn.getAttribute('data-group');
           const targetCat = btn.getAttribute('data-target-cat');
 
-          // Style der aktiven Buttons in der spezifischen Gruppe anpassen
           const groupBtns = document.querySelectorAll(`.cat-btn[data-group="${group}"]`);
           groupBtns.forEach(b => {
              b.classList.remove('active-cat');
@@ -531,7 +577,6 @@
           btn.classList.add('active-cat');
           btn.classList.remove('text-gray-500', 'hover:border-black/50');
 
-          // Entsprechenden Fächer neu rendern und Events verknüpfen
           if (group === 'front') {
             renderFronten(targetCat);
             handleConfigClick('.front-btn', '--front-bg', '--front-image');
