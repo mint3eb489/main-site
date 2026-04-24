@@ -120,11 +120,9 @@
         </div>
       </div>
 
-      <div class="order-1 md:order-2 bg-[#907B71]/10 flex items-center justify-center min-h-[40vh] md:min-h-full relative overflow-hidden group">
-        <div class="text-center opacity-40 relative z-10">
-          <i data-lucide="camera" class="w-8 h-8 mx-auto mb-2" stroke-width="1"></i>
-          <span class="text-sm tracking-widest uppercase">Profilbild Portrait</span>
-        </div>
+      <div class="order-1 md:order-2 bg-[#907B71]/10 relative overflow-hidden flex items-center justify-center min-h-[40vh] md:min-h-full">
+        <!-- Profilbild -->
+        <img src="images/bilder/profilbilder/enrico1.jpeg" alt="Enrico Belmonte" class="absolute inset-0 w-full h-full object-cover object-top" />
       </div>
     </section>
 
@@ -133,15 +131,28 @@
         <h2 class="text-2xl tracking-wide">Ausstellung & Referenzen</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3">
-        <div class="md:col-span-2 aspect-[4/3] md:aspect-auto bg-[#907B71]/5 border-b md:border-b-0 md:border-r border-black/10 relative flex items-center justify-center group hover:bg-[#907B71]/10 transition-colors cursor-pointer">
-          <span class="text-xs tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity relative z-10">Referenzbild 1 (Querformat)</span>
-        </div>
-        <div class="grid grid-rows-2">
-          <div class="aspect-square md:aspect-auto bg-[#D4A373]/10 border-b border-black/10 relative flex items-center justify-center group hover:bg-[#D4A373]/20 transition-colors cursor-pointer">
-            <span class="text-xs tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity relative z-10">Detailansicht / Material</span>
+        <!-- Großes Bild (Referenz 1) -->
+        <div class="md:col-span-2 aspect-[4/3] md:aspect-auto border-b md:border-b-0 md:border-r border-black/10 relative overflow-hidden group cursor-pointer">
+          <img src="images/bilder/kuechen/kueche1.jpg" alt="Küchenplanung Referenz" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span class="text-xs tracking-widest uppercase text-white">Referenzbild 1</span>
           </div>
-          <div class="aspect-square md:aspect-auto bg-[#907B71]/10 relative flex items-center justify-center group hover:bg-[#907B71]/20 transition-colors cursor-pointer">
-            <span class="text-xs tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity relative z-10">CARAT 3D-Render</span>
+        </div>
+        
+        <div class="grid grid-rows-2">
+          <!-- Detailansicht -->
+          <div class="aspect-square md:aspect-auto border-b border-black/10 relative overflow-hidden group cursor-pointer">
+            <img src="images/bilder/kuechen/detailansicht1.jpg" alt="Detailansicht Material" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="text-xs tracking-widest uppercase text-white">Detailansicht</span>
+            </div>
+          </div>
+          <!-- CARAT Render -->
+          <div class="aspect-square md:aspect-auto relative overflow-hidden group cursor-pointer">
+            <img src="images/bilder/kuechen/caratbild1.jpg" alt="CARAT 3D-Render" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span class="text-xs tracking-widest uppercase text-white">CARAT 3D-Render</span>
+            </div>
           </div>
         </div>
       </div>
