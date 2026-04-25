@@ -593,10 +593,12 @@
         </button>
       `).join('');
 
-      // Rahmen verkleinert (lg:inset-12) und Bild für sauberen Beschnitt leicht herangezoomt (scale-[1.05])
+      // Bilderrahmen-Effekt (Passepartout) mit starkem Zoom zum Abschneiden der Ränder
       document.getElementById('container-stil-images').innerHTML = katalogData.stilwelten.map((item, index) => `
-        <div id="img-${item.id}" class="stil-image absolute inset-8 lg:inset-12 rounded-xl shadow-xl border border-black/5 transition-opacity duration-800 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'} overflow-hidden">
-          <div class="absolute inset-0 bg-cover bg-center transform scale-[1.05]" style="background-color: ${item.bg}; background-image: ${item.img};"></div>
+        <div id="img-${item.id}" class="stil-image absolute inset-4 sm:inset-8 lg:inset-12 bg-white rounded-2xl shadow-2xl transition-opacity duration-800 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'} border border-black/5">
+          <div class="absolute inset-4 sm:inset-6 lg:inset-8 overflow-hidden rounded-lg shadow-inner">
+            <div class="absolute inset-0 bg-cover bg-center transform scale-110" style="background-color: ${item.bg}; background-image: ${item.img};"></div>
+          </div>
         </div>
       `).join('');
 
