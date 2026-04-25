@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Enrico Belmonte - Küchenfachberater & Raumgestalter</title>
+  
+  <!-- Dynamisches SVG Favicon (EB Monogramm) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232E2A28'/%3E%3Ctext x='50' y='64' font-family='sans-serif' font-size='46' font-weight='300' fill='%23D4A373' text-anchor='middle' letter-spacing='2'%3EEB%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -84,6 +88,18 @@
     /* Hover Lift für allgemeine Elemente */
     .hover-lift { transition: transform 0.3s ease; }
     .hover-lift:hover { transform: translateY(-4px); }
+
+    /* --- Scroll Animation (Fade-in) --- */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      will-change: opacity, transform;
+    }
+    .fade-in.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body class="min-h-screen font-sans font-light selection:bg-[#D4A373] selection:text-white relative overflow-x-hidden">
@@ -98,7 +114,8 @@
   </nav>
 
   <main class="max-w-6xl mx-auto">
-    <section class="grid md:grid-cols-2 min-h-[70vh] border-b border-black/10">
+    <!-- Fade-In Klasse hinzugefügt -->
+    <section class="fade-in grid md:grid-cols-2 min-h-[70vh] border-b border-black/10">
       <div class="p-8 md:p-16 flex flex-col justify-center order-2 md:order-1 border-t md:border-t-0 md:border-r border-black/10">
         <p class="text-xs uppercase tracking-widest mb-6 text-[#907B71]">Portfolio & Kontakt</p>
         <h1 class="text-5xl md:text-7xl font-normal tracking-tight mb-6 leading-tight">
@@ -120,13 +137,15 @@
         </div>
       </div>
 
-      <div class="order-1 md:order-2 bg-[#907B71]/10 relative overflow-hidden flex items-center justify-center min-h-[40vh] md:min-h-full">
+      <!-- Container passt sich am Handy an das Bild an, am PC füllt er die Höhe -->
+      <div class="order-1 md:order-2 bg-[#907B71]/10 relative overflow-hidden flex items-center justify-center">
         <!-- Profilbild -->
-        <img src="images/bilder/profilbilder/enrico1.jpeg" alt="Enrico Belmonte" class="absolute inset-0 w-full h-full object-cover object-top" />
+        <img src="images/bilder/profilbilder/enrico1.jpeg" alt="Enrico Belmonte" class="w-full h-auto md:absolute md:inset-0 md:h-full md:object-cover md:object-top" />
       </div>
     </section>
 
-    <section class="border-b border-black/10">
+    <!-- Fade-In Klasse hinzugefügt -->
+    <section class="fade-in border-b border-black/10">
       <div class="p-8 md:px-16 md:py-12 border-b border-black/10">
         <h2 class="text-2xl tracking-wide">Ausstellung & Referenzen</h2>
       </div>
@@ -158,17 +177,18 @@
       </div>
     </section>
 
-    <section class="grid md:grid-cols-3 border-b border-black/10">
+    <!-- Fade-In Klasse hinzugefügt -->
+    <section class="fade-in grid md:grid-cols-3 border-b border-black/10">
       <div class="p-8 md:p-16 md:border-r border-b md:border-b-0 border-black/10">
         <h2 class="text-2xl tracking-wide mb-4">Planung mit Tiefgang</h2>
         <p class="opacity-70 text-sm leading-relaxed">
-          Mein Prozess beginnt mit echtem Zuhören. Statt sofort am Bildschirm zu entwerfen, nehme ich mir Zeit für eine fundierte Bedarfsermittlung. Erst wenn ich deine Anforderungen genau verstehe, ziehe ich mich für die Ausarbeitung zurück. Diese getrennte Vorbereitung ermöglicht eine Komplexität und Detailtiefe, die im klassischen Beratungsgespräch oft verloren geht. Das Ergebnis ist eine Planung, die keine Fragen offen lässt.
+          Mein Prozess beginnt mit echtem Zuhören. Statt sofort am Bildschirm zu entwerfen, nehme ich mir Zeit für eine fundierte Bedarfsermittlung in einem ersten, unverbindlichen Gespräch bei uns in der Ausstellung. Erst wenn ich deine Anforderungen genau verstehe, ziehe ich mich für die Ausarbeitung zurück. Diese getrennte Vorbereitung ermöglicht eine Komplexität und Detailtiefe, die im klassischen Beratungsgespräch oft verloren geht. Das Ergebnis ist eine Planung, die keine Fragen offen lässt.
         </p>
       </div>
       <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2">
         <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors sm:border-r border-b border-black/10">
           <span class="text-xs font-medium" style="color: #D4A373">01</span>
-          <h3 class="text-lg tracking-wide mt-2 mb-2">Bedarfsanalyse - Die Grundlagen</h3>
+          <h3 class="text-lg tracking-wide mt-2 mb-2">Bedarfsanalyse - Grundlage</h3>
           <p class="text-sm opacity-60 leading-relaxed">Verständnis für deinen Raum sowie Wünsche und Vorstellung</p>
         </div>
         <div class="p-8 md:p-12 hover:bg-[#907B71]/5 transition-colors border-b border-black/10">
@@ -189,13 +209,25 @@
       </div>
     </section>
 
-    <footer class="p-8 md:p-16 flex flex-col md:flex-row justify-between items-center gap-8">
-      <div class="flex gap-6">
+    <!-- Fade-In Klasse hinzugefügt -->
+    <footer class="fade-in p-8 md:p-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+      <div class="flex flex-col gap-1">
+        <a href="https://maps.google.com/?daddr=Wilhelm-Kraut-Straße+30,+72336+Balingen" 
+           onclick="if(navigator.userAgent.match(/iPhone|iPad|iPod|Mac/i)) { this.href='http://maps.apple.com/?daddr=Wilhelm-Kraut-Straße+30,+72336+Balingen'; }"
+           target="_blank" 
+           class="text-sm opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">
+          <i data-lucide="map-pin" class="w-4 h-4" stroke-width="1.5"></i> Wilhelm-Kraut-Straße 30, 72336 Balingen
+        </a>
+      </div>
+      <div class="flex flex-wrap gap-6">
         <a href="mailto:belmonte@fs-kuechen.de" class="text-sm opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">
           <i data-lucide="mail" class="w-4 h-4" stroke-width="1.5"></i> E-Mail
         </a>
         <a href="tel:+49743399851311" class="text-sm opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">
           <i data-lucide="phone" class="w-4 h-4" stroke-width="1.5"></i> Telefon
+        </a>
+        <a href="https://www.fs-kuechen.de" target="_blank" class="text-sm opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">
+          <i data-lucide="globe" class="w-4 h-4" stroke-width="1.5"></i> Webseite
         </a>
       </div>
       <div class="flex gap-6">
@@ -243,9 +275,9 @@
         <!-- Left: Konfigurator -->
         <div class="p-5 lg:p-12 border-r border-black/10 space-y-6 flex flex-col bg-[#F4F1F0] overflow-y-auto">
           <div>
-            <h3 class="text-2xl font-light mb-2 tracking-tight">Materialien spüren.</h3>
+            <h3 class="text-2xl font-light mb-2 tracking-tight">Ästhetik begreifen.</h3>
             <p class="text-xs leading-relaxed opacity-80 max-w-md hidden sm:block">
-              Kombiniere Farben und Texturen. Die Collage rechts zeigt dir sofort, wie Arbeitsplatte, Korpus, Kehlleiste und Fronten miteinander harmonieren.
+              Design ist das Zusammenspiel von Details. Experimentiere mit Farben und Texturen, um ein erstes Gefühl für die Harmonie deiner zukünftigen Küche zu entwickeln.
             </p>
           </div>
 
@@ -324,9 +356,9 @@
         
         <div class="p-8 lg:p-16 border-r border-black/10 space-y-8 flex flex-col bg-[#F4F1F0]">
           <div>
-            <h3 class="text-3xl font-light mb-4 tracking-tight">Konzepte erleben.</h3>
+            <h3 class="text-3xl font-light mb-4 tracking-tight">Perspektiven entdecken.</h3>
             <p class="text-sm leading-relaxed opacity-80">
-              Wähle eine Stil-Welt aus, um fotorealistische Planungen (CARAT) in unterschiedlichen Materialkonzepten zu vergleichen.
+              Welcher Stil passt zu dir? Vergleiche hier verschiedene Materialkonzepte direkt im selben Raum, um ein Gefühl für deine perfekte Kombination zu bekommen.
             </p>
           </div>
 
@@ -528,7 +560,7 @@
         { id: "atlantic", title: "Atlantic Groove", desc: "Tiefes Navy Blue trifft auf die rhythmische Struktur von edlem Nussbaum und präzise, silberne Akzente.", bg: "#E8E5E3", img: "url('images/bilder/stilwelten/atlanticgroove.jpg')" },
         { id: "silky", title: "Silky Oak", desc: "Sanfte Puder-Nuancen und haptische Holzstrukturen vereint mit der zeitlosen Eleganz des Taj Mahal Quarzits.", bg: "#D4C5A9", img: "url('images/bilder/stilwelten/silkyoak.jpg')" },
         { id: "tropical", title: "Tropical Eclipse", desc: "Ein kraftvolles Zusammenspiel aus schwarzem Smartglas, dramatischem Naturstein und luxuriösen Gold-Akzenten.", bg: "#2E2A28", img: "url('images/bilder/stilwelten/tropicaleclipse.jpg')" },
-        { id: "forest", title: "Forest Heritage", desc: "Tiefes Midnight Green und basaltfarbene Akzente begegnen dunkel gebeizter Eiche und einer ausdrucksstarken, industriell marmorierten Arbeitsplatte.", bg: "#36453B", img: "url('images/bilder/stilwelten/forestheritage.jpg')" },
+        { id: "forest", title: "Forest Heritage", desc: "Tiefes Midnight Green und basaltfarbene Akzente begegnen dunkel gebeizter Eiche und einer ausdrucksstarken, marmorierten Arbeitsplatte.", bg: "#36453B", img: "url('images/bilder/stilwelten/forestheritage.jpg')" },
         { id: "roasted", title: "Roasted Velvet", desc: "Samtige Brown Powder Nuancen und warme Fango-Akzente verschmelzen mit dunkel gebeizter Eiche und der kristallinen Tiefe des Café Imperial Natursteins.", bg: "#4A3525", img: "url('images/bilder/stilwelten/roastedvelvet.jpg')" }
       ]
     };
@@ -772,8 +804,27 @@
       });
     };
 
+    // --- Scroll Animation Observer ---
+    const initScrollAnimations = () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            // Element nicht weiter überwachen, damit die Animation nur einmal (beim ersten Scrollen) abspielt
+            observer.unobserve(entry.target); 
+          }
+        });
+      }, {
+        threshold: 0.1, // Startet, wenn 10% des Elements im Bild sind
+        rootMargin: "0px 0px -50px 0px" // Verzögert den Start leicht, bis man etwas tiefer gescrollt hat
+      });
+
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    };
+
     // Applikation starten
     initKatalog();
+    initScrollAnimations();
 
   </script>
 </body>
